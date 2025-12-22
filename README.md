@@ -13,8 +13,6 @@ This code uses three open-access datasets to demonstrate On-Device Learning on I
 - [micro-kitti](https://huggingface.co/datasets/idsia-robotics/micro-kitti): used to simulate fine-tuning on an outdoor setup.
 - [micro-nyuv2](https://huggingface.co/datasets/idsia-robotics/micro-nyuv2): used to simulate fine-tuning on an indoor setup. 
 
-The scripts to generate the low resolution versions of the open access datasets are released under the [dataset_preprocessing/](./dataset_preprocessing/) folder. 
-
 ## The IDSIA-μMDE dataset
 
 To demonstrate the deployment of our On-Device Learning method on an ULP IoT node, we release [IDSIA-μMDE](https://huggingface.co/datasets/idsia-robotics/idsia-micro-mde), a custom dataset collected in a laboratory environment with a [Crazyflie2.1 nano-drone](https://www.bitcraze.io/products/old-products/crazyflie-2-1). Such dataset comprises:
