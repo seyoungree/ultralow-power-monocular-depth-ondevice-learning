@@ -1,0 +1,3 @@
+TartanAir Scenarios on training: 'abandonedfactory', 'seasonsforest', 'neighborhood'
+
+Validation: 48x48 KITTI validation set

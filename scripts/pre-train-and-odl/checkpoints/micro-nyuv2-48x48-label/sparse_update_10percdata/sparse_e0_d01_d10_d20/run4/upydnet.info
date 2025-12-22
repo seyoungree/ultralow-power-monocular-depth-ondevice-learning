@@ -1,0 +1,20 @@
+--- Input and label sizes: ---
+Input size: [3, 48, 48]
+Label size: [1, 48, 48]
+
+--- Hyperparameters: ---
+Epochs: 120
+Learning rate: 0.0001 to 0.001 (scale every 30 epochs)
+
+--- Results: ---
+best_epoch  = 52.000
+abs_rel     = 0.275
+sq_rel      = 0.223
+rmse        = 0.531
+rmse_log    = 0.346
+d1          = 0.488
+d2          = 0.799
+d3          = 0.931
+
+--- Trained Model: ---
+

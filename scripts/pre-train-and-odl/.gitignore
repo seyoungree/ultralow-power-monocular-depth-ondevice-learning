@@ -1,0 +1,15 @@
+train_log.txt
+kitti_train_log.txt
+tartanair_train_log.txt
+validation_outputs.txt
+ckpt/
+ckpt_run/
+run/
+./disp_log.txt
+./dpth_log.txt
+./disp_log.csv
+./dpth_log.csv
+datacsv/
+datacsv_best/
+nyuv2_distr/
+kitti_distr/
