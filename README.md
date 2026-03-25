@@ -110,6 +110,8 @@ python -m pip install torch torchvision numpy matplotlib argparse torchsummary t
 
 These packages could be installed e.g., in a conda environment that we will refer to as <env_name>.
 
+Franklin's Note: Don't forget to update conda from version 22 to 26! 
+
 
 # Pre-training with 48x48 labels and fine-tuning with 8x8 
 
