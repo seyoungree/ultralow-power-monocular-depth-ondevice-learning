@@ -46,6 +46,7 @@ import utils.dump_utils as dmp
 # Data visualization
 import matplotlib.pyplot as plt
 from torch.utils.tensorboard import SummaryWriter
+import datetime
 
 # Parser
 parser = argparse.ArgumentParser("Monocular Depth Estimation CNN Pre-Training (TartanAir) - uPyD-Net")
@@ -53,7 +54,7 @@ parser = argparse.ArgumentParser("Monocular Depth Estimation CNN Pre-Training (T
 parser.add_argument( '--tartanair_path', type=str, default='../../micro-tartanair/')
 parser.add_argument( '--model_name', type=str, default='upydnet')                     # 'cnn' or 'upydnet' or 'upydnet_l'
 # Training setup
-parser.add_argument( '--epochs', type=int, default=50 )
+parser.add_argument( '--epochs', type=int, default=200 )
 parser.add_argument( '--batch_size', type=int, default=16 )
 parser.add_argument( '--startup_learning_rate', type=float, default=1e-4)    # First epoch's learning rate to avoid gradient explosion
 parser.add_argument( '--startup_epoch', type=int, default=20)                 # Epoch after which to apply the init_learning_rate
@@ -107,10 +108,11 @@ DELETE_CKPT_AFTER_TRAINING = False
 print("\n>>> INITIALIZING TRAINING <<<")
 
 # Delete the tensorboard folder
-if resume_from_checkpoint == False and os.path.exists(f'{tensorboard_folder}'):
-    print("Removing old tensorboard folder before training..")
-    shutil.rmtree(f"{tensorboard_folder}")
-
+# if resume_from_checkpoint == False and os.path.exists(f'{tensorboard_folder}'):
+#     print("Removing old tensorboard folder before training..")
+#     shutil.rmtree(f"{tensorboard_folder}")
+run_id = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+tensorboard_folder = f"{tensorboard_folder}_{run_id}"
 # Initialize tensorboard
 writer = SummaryWriter(log_dir=tensorboard_folder)
 
@@ -139,6 +141,7 @@ valloader = torch.utils.data.DataLoader(valset, batch_size=batch_size, shuffle=T
 
 # Define device, models and training methods
 device = ("cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu")
+device = "cpu"
 print(f"Using {device} device")
 
 """
@@ -152,7 +155,7 @@ IM_CH_IN = img_size[0]
 IM_H_IN  = img_size[1]
 IM_W_IN  = img_size[2]
 
-DPTH_CH  = 1
+DPTH_CH  = 2
 DPTH_H   = dpt_size[0]
 DPTH_W   = dpt_size[1]
 
@@ -167,7 +170,7 @@ MODEL DEFINITION AND INITIALIZATION
 
 if model_name == 'upydnet':
 
-    net = uPydNet(IM_CH_IN, DPTH_CH).to(device)
+    net = uPydNetProb(IM_CH_IN, DPTH_CH).to(device)
     #for param in net.parameters():
     #    torch.nn.init.xavier_uniform_(param, gain=1.0, generator=None)
 
@@ -291,71 +294,41 @@ for epoch in range(starting_epoch, epochs, 1):  # loop over the dataset multiple
 
     for i, data in enumerate(trainloader):
 
-        # Monitor learning rate
         writer.add_scalar("Learning_Rate/Epoch", learning_rate, epoch)
 
-        # Get data from dictionary
-        imgL    = data['imgL']
-        #imgR    = data['imgR']
-        disp    = data['dispL']
-        depth   = data['depthL']
-        fb      = data['fb']
+        imgL  = data['imgL']
+        disp  = data['dispL']
+        depth = data['depthL']
+        fb    = data['fb']
 
         imgL = imgL.type(torch.FloatTensor)
-        #imgR = imgR.type(torch.FloatTensor)
-        imgL.to(device)
-        #imgR.to(device)
-        disp.to(device)
-        depth.to(device)
-        fb.to(device)
+
+        imgL = imgL.to(device)
+        disp = disp.to(device)
+        depth = depth.to(device)
+        fb = fb.to(device)
 
         if torch.sum(torch.isnan(imgL)) > 0:
             print('NaN values present in input!')
 
-        # zero the parameter gradients
         optimizer.zero_grad()
+        mu, log_var = net(imgL)
 
-        # forward + backward + optimize
-        outputs = net(imgL.to(device)).to(device)
-        outputs = torch.squeeze(outputs, 1)
+        # remove channel dimension
+        mu = torch.squeeze(mu, 1)
+        log_var = torch.squeeze(log_var, 1)
+        log_var = torch.clamp(log_var, min=-10.0, max=10.0)
 
-        # with torch.no_grad():
-        #     print("Training!")
-        #     for i in range(batch_size):
-        #         fig, ax = plt.subplots(1, 3)
+        # calculate loss
+        valid_mask = (disp != -1)
+        diff2 = (disp - mu) ** 2
+        loss_map = 0.5 * torch.exp(-log_var) * diff2 + 0.5 * log_var
+        loss = loss_map[valid_mask].mean()
 
-        #         imgsh  = imgL[i].squeeze(0).permute(1,2,0).to('cpu').type(torch.uint8)
-        #         dispsh = disp[i].squeeze(0).to('cpu')
-        #         outsh  = outputs[i].squeeze(0).to('cpu')
-        #         ax[0].imshow(imgsh)
-        #         ax[1].imshow(dispsh)
-        #         ax[2].imshow(outsh)
-
-        #         plt.tight_layout()
-        #         plt.show()
-
-        # loss, Lap, Lps, La, Lb = MonocularDepthSemiSupervisedLoss(
-        #             output         = outputs.to(device), 
-        #             target         = disp.to(device), 
-        #             imgL           = imgL.to(device), 
-        #             imgR           = imgR.to(device), 
-        #             aap            = aap, 
-        #             aps            = aps,
-        #             alpha          = 0.2,
-        #             invalid_value  = -1,
-        #             original_width = 48,
-        #             device         = device)
-
-        loss = ProxySupervisionLoss(
-            output        = outputs.to(device),
-            target        = disp.to(device),
-            alpha         = 0.2,
-            invalid_value = -1,
-            device        = device
-        )
         Lap = 0
         Lps = loss
-        La  = 0; Lb = 0
+        La = 0
+        Lb = 0
 
         loss.backward()
         optimizer.step()
@@ -376,97 +349,82 @@ for epoch in range(starting_epoch, epochs, 1):  # loop over the dataset multiple
     """
 
     total = 0
-    val_loss = 0; val_Lap = 0; val_Lps = 0; val_La = 0; val_Lb = 0
+    val_loss = 0
+    val_Lap = 0
+    val_Lps = 0
+    val_La = 0
+    val_Lb = 0
     num_batches = len(valloader)
     size = len(valloader.dataset)
-    abs_rel=0; sq_rel=0; rmse=0; rmse_log=0; d1=0; d2=0; d3=0
+    abs_rel = 0
+    sq_rel = 0
+    rmse = 0
+    rmse_log = 0
+    d1 = 0
+    d2 = 0
+    d3 = 0
 
     last_val_output = 0
-    
+    last_val_uncertainty = 0
+
     net.eval()
     with torch.no_grad():
         for test_data in valloader:
 
             # Get data from dictionary
-            val_imgL    = test_data['imgL']
-            #val_imgR    = test_data['imgR']
-            #val_depthGT = test_data['depthGT']
-            val_disp    = test_data['dispL']
-            val_depth   = test_data['depthL']
-            val_fb      = test_data['fb']
+            val_imgL  = test_data['imgL']
+            val_disp  = test_data['dispL']
+            val_depth = test_data['depthL']
+            val_fb    = test_data['fb']
 
             val_imgL = val_imgL.type(torch.FloatTensor)
-            #val_imgR = val_imgR.type(torch.FloatTensor)
-            val_imgL.to(device)
-            #val_imgR.to(device)
-            #val_depthGT.to(device)
-            val_disp.to(device)
-            val_depth.to(device)
-            val_fb.to(device)
 
-            # calculate outputs by running images through the network
-            val_outputs = net(val_imgL.to(device)).to(device)
-            val_outputs = torch.squeeze(val_outputs, 1)
+            val_imgL = val_imgL.to(device)
+            val_disp = val_disp.to(device)
+            val_depth = val_depth.to(device)
+            val_fb = val_fb.to(device)
 
-            # val_loss_t, val_Lap_t, val_Lps_t, val_La_t, val_Lb_t = MonocularDepthSemiSupervisedLoss(
-            #                                         output         = val_outputs.to(device), 
-            #                                         target         = val_disp.to(device), 
-            #                                         imgL           = val_imgL.to(device), 
-            #                                         imgR           = val_imgR.to(device), 
-            #                                         aap            = aap, 
-            #                                         aps            = aps,
-            #                                         alpha          = 0.2,
-            #                                         invalid_value  = -1,
-            #                                         original_width = MINIKITTI_MAX_WIDTH,
-            #                                         device         = device)
+            # Forward pass: probabilistic output
+            val_mu, val_log_var = net(val_imgL)
 
-            val_loss_t = ProxySupervisionLoss(
-                output        = val_outputs.to(device),
-                target        = val_disp.to(device),
-                alpha         = 0.2,
-                invalid_value = -1,
-                device        = device
-            )
+            val_mu = torch.squeeze(val_mu, 1)
+            val_log_var = torch.squeeze(val_log_var, 1)
 
-            val_loss += val_loss_t
-            val_Lap  += 0 #val_Lap_t
-            val_Lps  += 0 #val_Lps_t
-            val_La   += 0 #val_La_t
-            val_Lb   += 0 #val_Lb_t
+            # Extra stability clamp
+            val_log_var = torch.clamp(val_log_var, min=-10.0, max=10.0)
 
-            # Compute metrics
-            #val_out_disp_ups  = transforms.functional.resize(img=val_outputs, size=[val_depthGT.size()[-2], val_depthGT.size()[-1]], interpolation=transforms.InterpolationMode.NEAREST)
+            # Mean prediction is what replaces old val_outputs
+            val_outputs = val_mu
+
+            # Mask out invalid proxy labels
+            valid_mask = (val_disp != -1)
+
+            # Gaussian negative log-likelihood
+            val_loss_map = 0.5 * torch.exp(-val_log_var) * (val_disp - val_mu) ** 2 + 0.5 * val_log_var
+            val_loss_t = val_loss_map[valid_mask].mean()
+
+            val_loss += val_loss_t.item()
+            val_Lap += 0
+            val_Lps += val_loss_t.item()
+            val_La += 0
+            val_Lb += 0
+
+            # Compute metrics using mean prediction only
             val_out_depth = compute_depth_map_validation(val_fb, val_outputs, device)
-            run_abs_rel, run_sq_rel, run_rmse, run_rmse_log, run_d1, run_d2, run_d3 = compute_errors_masked_train(val_out_depth.to(device), val_depth.to(device))
-            abs_rel  += run_abs_rel
-            sq_rel   += run_sq_rel
-            rmse     += run_rmse
+            run_abs_rel, run_sq_rel, run_rmse, run_rmse_log, run_d1, run_d2, run_d3 = \
+                compute_errors_masked_train(val_out_depth.to(device), val_depth.to(device))
+
+            abs_rel += run_abs_rel
+            sq_rel += run_sq_rel
+            rmse += run_rmse
             rmse_log += run_rmse_log
-            d1       += run_d1
-            d2       += run_d2
-            d3       += run_d3
+            d1 += run_d1
+            d2 += run_d2
+            d3 += run_d3
 
-            # with torch.no_grad():
-            #     print("Validation!")
-            #     for i in range(batch_size):
-            #         fig, ax = plt.subplots(1, 4)
-
-            #         img  = val_imgL[i].squeeze(0).permute(1,2,0).to('cpu').type(torch.uint8)
-            #         disp = val_disp[i].squeeze(0).to('cpu')
-            #         out  = val_out_disp_ups[i].squeeze(0).to('cpu')
-            #         out_depth = val_out_depth_ups[i].squeeze(0).to('cpu')
-            #         ax[0].imshow(img)
-            #         ax[1].imshow(disp)
-            #         ax[2].imshow(out)
-            #         ax[3].imshow(out_depth)
-
-            #         plt.tight_layout()
-            #         plt.show()
-
-            #         import pdb; pdb.set_trace()
-
-            # Save validation output to be printed
+            # Save last outputs for visualization
             last_val_output = val_outputs
+            last_val_uncertainty = torch.exp(0.5 * val_log_var)
 
     with torch.no_grad():
         val_loss    /= num_batches

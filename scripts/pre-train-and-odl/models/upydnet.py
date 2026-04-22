@@ -125,6 +125,32 @@ class uPydNet(nn.Module):
         return dc2
     
 
+class uPydNetProb(nn.Module):
+
+    def __init__(self, in_ch, out_ch=2):
+        super(uPydNetProb, self).__init__()
+
+        self.encoder  = ShallowEncoder(in_ch, 8, 16, 32)
+        self.decoder0 = PDecoder(32, 32, 32)
+        self.decoder1 = PDecoder(48, 32, 32)
+        self.decoder2 = PDecoder(40, 32, out_ch)
+        self.ups0     = Upsampler(32, 32)
+        self.ups1     = Upsampler(32, 32)
+        self.relu_mu  = nn.ReLU()
+
+    def forward(self, x):
+        pyd0, pyd1, pyd2 = self.encoder(x)
+        dc0     = self.ups0(self.decoder0(pyd2))
+        concat0 = torch.cat((pyd1, dc0), 1)
+        dc1     = self.ups1(self.decoder1(concat0))
+        concat1 = torch.cat((pyd0, dc1), 1)
+        out     = self.decoder2(concat1)
+
+        mu = self.relu_mu(out[:, 0:1, :, :])
+        log_var = torch.clamp(out[:, 1:2, :, :], -10.0, 10.0)
+        return mu, log_var
+    
+
 # uPyD-net large
 class uPydNet_L(nn.Module):
 
