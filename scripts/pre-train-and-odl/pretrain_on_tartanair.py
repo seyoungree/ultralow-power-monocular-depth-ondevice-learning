@@ -74,6 +74,8 @@ parser.add_argument( '--resume_from_checkpoint', type=bool, default=False)
 parser.add_argument( '--checkpoint_folder', type=str, default='./ckpt')                 # Folder for the best performing model
 parser.add_argument( '--running_checkpoint_folder', type=str, default='./ckpt_run')     # Folder with last epoch's model
 parser.add_argument( '--tensorboard_folder', type=str, default='./run')                 # Folder to store tensorboard data about training
+
+parser.add_argument('--probabilistic', type=int, default=0)                             # 1 = uPydNetProb, 0 = uPydNet original
 args = parser.parse_args()
 
 # Training hyperparameters and misc
@@ -112,7 +114,15 @@ print("\n>>> INITIALIZING TRAINING <<<")
 #     print("Removing old tensorboard folder before training..")
 #     shutil.rmtree(f"{tensorboard_folder}")
 run_id = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-tensorboard_folder = f"{tensorboard_folder}_{run_id}"
+run_id = f"{model_name}_{'prob' if args.probabilistic else 'det'}_{datetime.datetime.now().strftime('%Y%m%d-%H%M%S')}"
+
+checkpoint_folder         = f"{args.checkpoint_folder}_{run_id}"
+running_checkpoint_folder = f"{args.running_checkpoint_folder}_{run_id}"
+tensorboard_folder        = f"{args.tensorboard_folder}_{run_id}"
+statedict_file            = f"{statedict_dir}/{model_name}_{run_id}.pth"
+statedict_info            = f"{statedict_dir}/{model_name}_{run_id}.info"
+filename                  = f"train_log_{run_id}.txt"
+out_file                  = f"validation_outputs_{run_id}.txt"
 # Initialize tensorboard
 writer = SummaryWriter(log_dir=tensorboard_folder)
 
@@ -130,18 +140,18 @@ if hflip_train == 0:
 #                        'hospital', 'japanesealley', 'neighborhood', 'ocean', 'office', 'office2', 'oldtown', 'seasidetown',
 #                        'seasonsforest', 'seasonsforest_winter', 'soulcity', 'westerndesert']
 
-tartanair_scenarios_train = ['abandonedfactory']
+tartanair_scenarios_train = ['abandonedfactory', 'neighborhood', 'seasonsforest']
 tartanair_scenarios_val   = ['abandonedfactory_night']
 
 trainset    = dataloader.miniTartanAir(root_dir=TARTANAIR_PATH, transform=transform_train, scenarios=tartanair_scenarios_train, normalize=normalize_imgs, flip_horizontally=hflip_train)
-trainloader = torch.utils.data.DataLoader(trainset, batch_size=batch_size, shuffle=True, num_workers=0)
+trainloader = torch.utils.data.DataLoader(trainset, batch_size=batch_size, shuffle=True, num_workers=8)
 
 valset    = dataloader.miniTartanAir(root_dir=TARTANAIR_PATH, transform=transform_val, scenarios=tartanair_scenarios_val, normalize=normalize_imgs, flip_horizontally=False)
-valloader = torch.utils.data.DataLoader(valset, batch_size=batch_size, shuffle=True, num_workers=0)
+valloader = torch.utils.data.DataLoader(valset, batch_size=batch_size, shuffle=True, num_workers=2)
 
 # Define device, models and training methods
 device = ("cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu")
-device = "cpu"
+# device = "cpu"
 print(f"Using {device} device")
 
 """
@@ -155,7 +165,7 @@ IM_CH_IN = img_size[0]
 IM_H_IN  = img_size[1]
 IM_W_IN  = img_size[2]
 
-DPTH_CH  = 2
+DPTH_CH  = 2 if args.probabilistic else 1
 DPTH_H   = dpt_size[0]
 DPTH_W   = dpt_size[1]
 
@@ -169,29 +179,21 @@ MODEL DEFINITION AND INITIALIZATION
 """
 
 if model_name == 'upydnet':
-
-    net = uPydNetProb(IM_CH_IN, DPTH_CH).to(device)
-    #for param in net.parameters():
-    #    torch.nn.init.xavier_uniform_(param, gain=1.0, generator=None)
-
-    # Print model structure
+    if args.probabilistic:
+        net = uPydNetProb(IM_CH_IN, DPTH_CH).to(device)
+    else:
+        net = uPydNet(IM_CH_IN, DPTH_CH).to(device)
     print("\nModel to be trained:")
     summary(net, (IM_CH_IN, IM_H_IN, IM_W_IN), batch_size=batch_size)
     print(f"\nInput size: [{IM_CH_IN}, {IM_H_IN}, {IM_W_IN}]")
     print(f"Output size: [{DPTH_CH}, {DPTH_H}, {DPTH_W}]")
-
 elif model_name == 'upydnet_l':
-
-    net = uPydNet_L(IM_CH_IN, DPTH_CH).to(device)
-    #for param in net.parameters():
-    #    torch.nn.init.xavier_uniform_(param, gain=1.0, generator=None)
-
-    # Print model structure
+    if args.probabilistic:
+        net = uPydNet_L_Prob(IM_CH_IN, DPTH_CH).to(device)  # assuming you add this
+    else:
+        net = uPydNet_L(IM_CH_IN, DPTH_CH).to(device)
     print("\nModel to be trained:")
     summary(net, (IM_CH_IN, IM_H_IN, IM_W_IN), batch_size=batch_size)
-    print(f"\nInput size: [{IM_CH_IN}, {IM_H_IN}, {IM_W_IN}]")
-    print(f"Output size: [{DPTH_CH}, {DPTH_H}, {DPTH_W}]")
-
 else:
     print('Invalid model selection!!')
     exit()
@@ -312,18 +314,28 @@ for epoch in range(starting_epoch, epochs, 1):  # loop over the dataset multiple
             print('NaN values present in input!')
 
         optimizer.zero_grad()
-        mu, log_var = net(imgL)
-
-        # remove channel dimension
-        mu = torch.squeeze(mu, 1)
-        log_var = torch.squeeze(log_var, 1)
-        log_var = torch.clamp(log_var, min=-10.0, max=10.0)
-
-        # calculate loss
-        valid_mask = (disp != -1)
-        diff2 = (disp - mu) ** 2
-        loss_map = 0.5 * torch.exp(-log_var) * diff2 + 0.5 * log_var
-        loss = loss_map[valid_mask].mean()
+        if args.probabilistic:
+            mu, log_var = net(imgL)
+            mu      = torch.squeeze(mu, 1)
+            log_var = torch.squeeze(log_var, 1)
+            log_var = torch.clamp(log_var, min=-10.0, max=10.0)
+            valid_mask = (disp != -1)
+            diff2      = (disp - mu) ** 2
+            loss_map   = 0.5 * torch.exp(-log_var) * diff2 + 0.5 * log_var
+            loss       = loss_map[valid_mask].mean()
+            mu         = mu
+        else:
+            outputs    = net(imgL)
+            outputs    = torch.squeeze(outputs, 1)
+            loss       = ProxySupervisionLoss(
+                            output        = outputs.to(device),
+                            target        = disp.to(device),
+                            alpha         = 0.2,
+                            invalid_value = -1,
+                            device        = device
+                        )
+            mu         = outputs
+            log_var    = None
 
         Lap = 0
         Lps = loss
@@ -384,25 +396,27 @@ for epoch in range(starting_epoch, epochs, 1):  # loop over the dataset multiple
             val_depth = val_depth.to(device)
             val_fb = val_fb.to(device)
 
-            # Forward pass: probabilistic output
-            val_mu, val_log_var = net(val_imgL)
+            if args.probabilistic:
+                val_mu, val_log_var = net(val_imgL)
+                val_mu      = torch.squeeze(val_mu, 1)
+                val_log_var = torch.squeeze(val_log_var, 1)
+                val_log_var = torch.clamp(val_log_var, min=-10.0, max=10.0)
+                valid_mask   = (val_disp != -1)
+                val_loss_map = 0.5 * torch.exp(-val_log_var) * (val_disp - val_mu) ** 2 + 0.5 * val_log_var
+                val_loss_t   = val_loss_map[valid_mask].mean()
+            else:
+                val_outputs  = net(val_imgL)
+                val_mu       = torch.squeeze(val_outputs, 1)
+                val_log_var  = None
+                val_loss_t   = ProxySupervisionLoss(
+                                output        = val_mu.to(device),
+                                target        = val_disp.to(device),
+                                alpha         = 0.2,
+                                invalid_value = -1,
+                                device        = device
+                            )
 
-            val_mu = torch.squeeze(val_mu, 1)
-            val_log_var = torch.squeeze(val_log_var, 1)
-
-            # Extra stability clamp
-            val_log_var = torch.clamp(val_log_var, min=-10.0, max=10.0)
-
-            # Mean prediction is what replaces old val_outputs
             val_outputs = val_mu
-
-            # Mask out invalid proxy labels
-            valid_mask = (val_disp != -1)
-
-            # Gaussian negative log-likelihood
-            val_loss_map = 0.5 * torch.exp(-val_log_var) * (val_disp - val_mu) ** 2 + 0.5 * val_log_var
-            val_loss_t = val_loss_map[valid_mask].mean()
-
             val_loss += val_loss_t.item()
             val_Lap += 0
             val_Lps += val_loss_t.item()
@@ -424,7 +438,7 @@ for epoch in range(starting_epoch, epochs, 1):  # loop over the dataset multiple
 
             # Save last outputs for visualization
             last_val_output = val_outputs
-            last_val_uncertainty = torch.exp(0.5 * val_log_var)
+            last_val_uncertainty = torch.exp(0.5 * val_log_var) if args.probabilistic else None
 
     with torch.no_grad():
         val_loss    /= num_batches
@@ -459,11 +473,22 @@ for epoch in range(starting_epoch, epochs, 1):  # loop over the dataset multiple
         writer.add_scalar("Train_Loss/Epoch", loss, epoch)
         writer.add_scalar("Train_Lap/Epoch" , Lap, epoch)
         writer.add_scalar("Train_Lps/Epoch" , Lps, epoch)
+        if args.probabilistic:
+            writer.add_scalar("Train_LogVar/Mean", log_var.mean(), epoch)
+            writer.add_scalar("Train_LogVar/Std",  log_var.std(),  epoch)
+            writer.add_scalar("Train_LogVar/Min",  log_var.min(),  epoch)
+            writer.add_scalar("Train_LogVar/Max",  log_var.max(),  epoch)
         # Loss components (validation)
         writer.add_scalar("Val_Loss/Epoch", val_loss, epoch)
         writer.add_scalar("Val_Lap/Epoch" , val_Lap, epoch)
         writer.add_scalar("Val_Lps/Epoch" , val_Lps, epoch)
         # Qualiy metrics (validation)
+        if args.probabilistic:
+            writer.add_scalar("Val_LogVar/Mean", val_log_var.mean(), epoch)
+            writer.add_scalar("Val_LogVar/Std",  val_log_var.std(),  epoch)
+            writer.add_scalar("Val_LogVar/Min",  val_log_var.min(),  epoch)
+            writer.add_scalar("Val_LogVar/Max",  val_log_var.max(),  epoch)
+            writer.add_scalar("Val_Variance/Mean", torch.exp(val_log_var).mean(), epoch)
         writer.add_scalar("Abs_rel/Epoch" , abs_rel, epoch)
         writer.add_scalar("Sq_rel/Epoch"  , sq_rel, epoch)
         writer.add_scalar("RMSE/Epoch"    , rmse, epoch)
