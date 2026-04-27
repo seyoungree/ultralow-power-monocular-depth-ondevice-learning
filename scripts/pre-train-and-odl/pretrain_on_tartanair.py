@@ -76,6 +76,9 @@ parser.add_argument( '--running_checkpoint_folder', type=str, default='./ckpt_ru
 parser.add_argument( '--tensorboard_folder', type=str, default='./run')                 # Folder to store tensorboard data about training
 
 parser.add_argument('--probabilistic', type=int, default=0)                             # 1 = uPydNetProb, 0 = uPydNet original
+parser.add_argument('--mc_dropout', type=int, default=0)        # 1 = enabled
+parser.add_argument('--mc_dropout_p', type=float, default=0.1)  # dropout probability
+parser.add_argument('--mc_dropout_samples', type=int, default=5) # inference samples
 args = parser.parse_args()
 
 # Training hyperparameters and misc
@@ -114,7 +117,13 @@ print("\n>>> INITIALIZING TRAINING <<<")
 #     print("Removing old tensorboard folder before training..")
 #     shutil.rmtree(f"{tensorboard_folder}")
 run_id = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-run_id = f"{model_name}_{'prob' if args.probabilistic else 'det'}_{datetime.datetime.now().strftime('%Y%m%d-%H%M%S')}"
+if args.probabilistic:
+    mode_str = 'prob'
+elif args.mc_dropout:
+    mode_str = f'mcd{args.mc_dropout_p}'
+else:
+    mode_str = 'det'
+run_id = f"{model_name}_{mode_str}_{datetime.datetime.now().strftime('%Y%m%d-%H%M%S')}"
 
 checkpoint_folder         = f"{args.checkpoint_folder}_{run_id}"
 running_checkpoint_folder = f"{args.running_checkpoint_folder}_{run_id}"
@@ -181,23 +190,45 @@ MODEL DEFINITION AND INITIALIZATION
 if model_name == 'upydnet':
     if args.probabilistic:
         net = uPydNetProb(IM_CH_IN, DPTH_CH).to(device)
+    elif args.mc_dropout:
+        net = uPydNet(IM_CH_IN, DPTH_CH, dropout_p=args.mc_dropout_p).to(device)
     else:
-        net = uPydNet(IM_CH_IN, DPTH_CH).to(device)
+        net = uPydNet(IM_CH_IN, DPTH_CH, dropout_p=0.0).to(device) 
     print("\nModel to be trained:")
     summary(net, (IM_CH_IN, IM_H_IN, IM_W_IN), batch_size=batch_size)
     print(f"\nInput size: [{IM_CH_IN}, {IM_H_IN}, {IM_W_IN}]")
     print(f"Output size: [{DPTH_CH}, {DPTH_H}, {DPTH_W}]")
 elif model_name == 'upydnet_l':
     if args.probabilistic:
-        net = uPydNet_L_Prob(IM_CH_IN, DPTH_CH).to(device)  # assuming you add this
+        net = uPydNetProb_L(IM_CH_IN, DPTH_CH).to(device)
+    elif args.mc_dropout:
+        net = uPydNet_L(IM_CH_IN, DPTH_CH, dropout_p=args.mc_dropout_p).to(device)
     else:
-        net = uPydNet_L(IM_CH_IN, DPTH_CH).to(device)
+        net = uPydNet_L(IM_CH_IN, DPTH_CH, dropout_p=0.0).to(device)
     print("\nModel to be trained:")
     summary(net, (IM_CH_IN, IM_H_IN, IM_W_IN), batch_size=batch_size)
 else:
     print('Invalid model selection!!')
     exit()
 
+def enable_mc_dropout(model):
+    for m in model.modules():
+        if isinstance(m, nn.Dropout2d):
+            m.train()
+
+def mc_dropout_inference(net, img, n_samples, device):
+    net.eval()
+    enable_mc_dropout(net)
+    preds = []
+    with torch.no_grad():
+        for _ in range(n_samples):
+            output = net(img)
+            output = torch.squeeze(output, 1)
+            preds.append(output)
+    preds       = torch.stack(preds, dim=0)  # [n_samples, B, H, W]
+    mean_pred   = preds.mean(dim=0)           # [B, H, W]
+    uncertainty = preds.std(dim=0)            # [B, H, W]
+    return mean_pred, uncertainty
 """
 TRAINING 
 """
@@ -359,7 +390,6 @@ for epoch in range(starting_epoch, epochs, 1):  # loop over the dataset multiple
     """
     VALIDATE AFTER EVERY EPOCH
     """
-
     total = 0
     val_loss = 0
     val_Lap = 0
@@ -379,7 +409,8 @@ for epoch in range(starting_epoch, epochs, 1):  # loop over the dataset multiple
     last_val_output = 0
     last_val_uncertainty = 0
 
-    net.eval()
+    if not args.mc_dropout:
+        net.eval()
     with torch.no_grad():
         for test_data in valloader:
 
@@ -404,10 +435,31 @@ for epoch in range(starting_epoch, epochs, 1):  # loop over the dataset multiple
                 valid_mask   = (val_disp != -1)
                 val_loss_map = 0.5 * torch.exp(-val_log_var) * (val_disp - val_mu) ** 2 + 0.5 * val_log_var
                 val_loss_t   = val_loss_map[valid_mask].mean()
+                val_uncertainty = torch.exp(0.5 * val_log_var)
+
+            elif args.mc_dropout:
+                # mc_dropout_inference handles eval + dropout enable internally
+                val_mu, val_uncertainty = mc_dropout_inference(
+                    net, val_imgL,
+                    n_samples=args.mc_dropout_samples,
+                    device=device
+                )
+                val_log_var  = None
+                valid_mask   = (val_disp != -1)
+                val_loss_t   = ProxySupervisionLoss(
+                                output        = val_mu.to(device),
+                                target        = val_disp.to(device),
+                                alpha         = 0.2,
+                                invalid_value = -1,
+                                device        = device
+                            )
+
             else:
                 val_outputs  = net(val_imgL)
                 val_mu       = torch.squeeze(val_outputs, 1)
                 val_log_var  = None
+                val_uncertainty = None
+                valid_mask   = (val_disp != -1)
                 val_loss_t   = ProxySupervisionLoss(
                                 output        = val_mu.to(device),
                                 target        = val_disp.to(device),
@@ -438,7 +490,7 @@ for epoch in range(starting_epoch, epochs, 1):  # loop over the dataset multiple
 
             # Save last outputs for visualization
             last_val_output = val_outputs
-            last_val_uncertainty = torch.exp(0.5 * val_log_var) if args.probabilistic else None
+            last_val_uncertainty = val_uncertainty
 
     with torch.no_grad():
         val_loss    /= num_batches

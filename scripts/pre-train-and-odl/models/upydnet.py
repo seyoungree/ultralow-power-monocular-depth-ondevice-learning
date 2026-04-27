@@ -103,7 +103,7 @@ class Upsampler(nn.Module):
 # Standard uPyD-Net
 class uPydNet(nn.Module):
 
-    def __init__(self, in_ch, out_ch):
+    def __init__(self, in_ch, out_ch, dropout_p=0.0):
         super(uPydNet, self).__init__()    
         
         self.encoder  = ShallowEncoder(in_ch, 8, 16, 32)
@@ -113,9 +113,12 @@ class uPydNet(nn.Module):
         self.ups0     = Upsampler(32, 32)
         self.ups1     = Upsampler(32, 32)
         self.relu     = nn.ReLU()
+        self.use_dropout = dropout_p > 0.0
+        self.dropout = nn.Dropout2d(p=dropout_p) if dropout_p > 0.0 else nn.Identity()
 
     def forward(self, x):
         pyd0, pyd1, pyd2 = self.encoder(x)
+        pyd2 = self.dropout(pyd2) if self.use_dropout else pyd2
         dc0     = self.ups0(self.decoder0(pyd2))
         concat0 = torch.cat((pyd1, dc0), 1)     # Concat on channels
         dc1     = self.ups1(self.decoder1(concat0))
