@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Export variable to limit OPENMP threads
-export OMP_NUM_THREADS=8
+export OMP_NUM_THREADS=16
 # Save experiment name and 
 EXPERIMENT_NAME="pretrain_on_tartanair"
 export EXPERIMENT_NAME

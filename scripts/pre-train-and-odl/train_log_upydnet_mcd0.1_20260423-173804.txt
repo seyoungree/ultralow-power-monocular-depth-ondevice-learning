@@ -1,0 +1,1132 @@
+--------------------------------------------------------
+TRAINING MODEL FOR 200 EPOCHS WITH LEARNING RATE 0.0001
+--------------------------------------------------------
+>>> EPOCH 0 <<<
+LR = 0.0001, avg_loss = 0.090347
+abs_rel  = 1.002
+sq_rel   = 39.949
+rmse     = 23.697
+rmse_log = 1.056
+d1       = 0.180
+d2       = 0.351
+d3       = 0.495
+
+>>> EPOCH 1 <<<
+LR = 0.0001, avg_loss = 0.083175
+abs_rel  = 0.809
+sq_rel   = 29.454
+rmse     = 21.641
+rmse_log = 0.959
+d1       = 0.241
+d2       = 0.432
+d3       = 0.575
+
+>>> EPOCH 2 <<<
+LR = 0.0001, avg_loss = 0.082930
+abs_rel  = 0.867
+sq_rel   = 32.910
+rmse     = 21.744
+rmse_log = 0.944
+d1       = 0.257
+d2       = 0.448
+d3       = 0.589
+
+>>> EPOCH 3 <<<
+LR = 0.0001, avg_loss = 0.084129
+abs_rel  = 1.524
+sq_rel   = 75.893
+rmse     = 25.923
+rmse_log = 1.029
+d1       = 0.249
+d2       = 0.446
+d3       = 0.580
+
+>>> EPOCH 4 <<<
+LR = 0.0001, avg_loss = 0.078075
+abs_rel  = 1.139
+sq_rel   = 53.918
+rmse     = 23.625
+rmse_log = 0.936
+d1       = 0.297
+d2       = 0.502
+d3       = 0.636
+
+>>> EPOCH 5 <<<
+LR = 0.0001, avg_loss = 0.083920
+abs_rel  = 1.440
+sq_rel   = 72.104
+rmse     = 24.949
+rmse_log = 1.018
+d1       = 0.281
+d2       = 0.477
+d3       = 0.608
+
+>>> EPOCH 6 <<<
+LR = 0.0001, avg_loss = 0.073472
+abs_rel  = 1.021
+sq_rel   = 47.354
+rmse     = 22.720
+rmse_log = 0.887
+d1       = 0.346
+d2       = 0.550
+d3       = 0.670
+
+>>> EPOCH 7 <<<
+LR = 0.0001, avg_loss = 0.075730
+abs_rel  = 1.137
+sq_rel   = 54.249
+rmse     = 23.654
+rmse_log = 0.927
+d1       = 0.326
+d2       = 0.532
+d3       = 0.656
+
+>>> EPOCH 8 <<<
+LR = 0.0001, avg_loss = 0.075461
+abs_rel  = 1.175
+sq_rel   = 57.176
+rmse     = 23.677
+rmse_log = 0.927
+d1       = 0.331
+d2       = 0.542
+d3       = 0.663
+
+>>> EPOCH 9 <<<
+LR = 0.0001, avg_loss = 0.072178
+abs_rel  = 1.072
+sq_rel   = 51.263
+rmse     = 23.448
+rmse_log = 0.894
+d1       = 0.311
+d2       = 0.545
+d3       = 0.679
+
+>>> EPOCH 10 <<<
+LR = 0.0001, avg_loss = 0.069758
+abs_rel  = 0.901
+sq_rel   = 39.794
+rmse     = 22.533
+rmse_log = 0.854
+d1       = 0.309
+d2       = 0.538
+d3       = 0.684
+
+>>> EPOCH 11 <<<
+LR = 0.0001, avg_loss = 0.069252
+abs_rel  = 0.907
+sq_rel   = 40.706
+rmse     = 22.336
+rmse_log = 0.861
+d1       = 0.343
+d2       = 0.571
+d3       = 0.698
+
+>>> EPOCH 12 <<<
+LR = 0.0001, avg_loss = 0.071599
+abs_rel  = 0.961
+sq_rel   = 43.836
+rmse     = 22.859
+rmse_log = 0.894
+d1       = 0.334
+d2       = 0.558
+d3       = 0.684
+
+>>> EPOCH 13 <<<
+LR = 0.0001, avg_loss = 0.073077
+abs_rel  = 1.473
+sq_rel   = 79.207
+rmse     = 25.363
+rmse_log = 0.978
+d1       = 0.346
+d2       = 0.558
+d3       = 0.673
+
+>>> EPOCH 14 <<<
+LR = 0.0001, avg_loss = 0.065986
+abs_rel  = 1.060
+sq_rel   = 51.107
+rmse     = 22.847
+rmse_log = 0.862
+d1       = 0.371
+d2       = 0.595
+d3       = 0.713
+
+>>> EPOCH 15 <<<
+LR = 0.0001, avg_loss = 0.071383
+abs_rel  = 0.924
+sq_rel   = 41.234
+rmse     = 22.283
+rmse_log = 0.870
+d1       = 0.307
+d2       = 0.538
+d3       = 0.687
+
+>>> EPOCH 16 <<<
+LR = 0.0001, avg_loss = 0.066771
+abs_rel  = 0.894
+sq_rel   = 39.980
+rmse     = 22.893
+rmse_log = 0.855
+d1       = 0.333
+d2       = 0.556
+d3       = 0.693
+
+>>> EPOCH 17 <<<
+LR = 0.0001, avg_loss = 0.072472
+abs_rel  = 1.298
+sq_rel   = 66.626
+rmse     = 24.451
+rmse_log = 0.934
+d1       = 0.320
+d2       = 0.552
+d3       = 0.680
+
+>>> EPOCH 18 <<<
+LR = 0.0001, avg_loss = 0.068360
+abs_rel  = 1.134
+sq_rel   = 56.683
+rmse     = 23.290
+rmse_log = 0.883
+d1       = 0.351
+d2       = 0.586
+d3       = 0.710
+
+>>> EPOCH 19 <<<
+LR = 0.0001, avg_loss = 0.069563
+abs_rel  = 0.976
+sq_rel   = 45.214
+rmse     = 22.614
+rmse_log = 0.864
+d1       = 0.328
+d2       = 0.557
+d3       = 0.696
+
+>>> EPOCH 20 <<<
+LR = 5e-05, avg_loss = 0.066201
+abs_rel  = 0.773
+sq_rel   = 31.800
+rmse     = 21.739
+rmse_log = 0.821
+d1       = 0.334
+d2       = 0.555
+d3       = 0.698
+
+>>> EPOCH 21 <<<
+LR = 5e-05, avg_loss = 0.072520
+abs_rel  = 0.968
+sq_rel   = 43.423
+rmse     = 22.165
+rmse_log = 0.874
+d1       = 0.338
+d2       = 0.563
+d3       = 0.692
+
+>>> EPOCH 22 <<<
+LR = 5e-05, avg_loss = 0.070668
+abs_rel  = 1.232
+sq_rel   = 62.621
+rmse     = 24.426
+rmse_log = 0.915
+d1       = 0.330
+d2       = 0.562
+d3       = 0.689
+
+>>> EPOCH 23 <<<
+LR = 5e-05, avg_loss = 0.063293
+abs_rel  = 0.981
+sq_rel   = 46.041
+rmse     = 22.299
+rmse_log = 0.829
+d1       = 0.326
+d2       = 0.568
+d3       = 0.723
+
+>>> EPOCH 24 <<<
+LR = 5e-05, avg_loss = 0.069688
+abs_rel  = 1.596
+sq_rel   = 86.506
+rmse     = 26.522
+rmse_log = 0.984
+d1       = 0.345
+d2       = 0.554
+d3       = 0.669
+
+>>> EPOCH 25 <<<
+LR = 5e-05, avg_loss = 0.069133
+abs_rel  = 1.123
+sq_rel   = 54.929
+rmse     = 23.209
+rmse_log = 0.894
+d1       = 0.331
+d2       = 0.558
+d3       = 0.694
+
+>>> EPOCH 26 <<<
+LR = 5e-05, avg_loss = 0.063479
+abs_rel  = 1.328
+sq_rel   = 69.318
+rmse     = 24.045
+rmse_log = 0.894
+d1       = 0.341
+d2       = 0.584
+d3       = 0.722
+
+>>> EPOCH 27 <<<
+LR = 5e-05, avg_loss = 0.069015
+abs_rel  = 0.896
+sq_rel   = 39.487
+rmse     = 22.343
+rmse_log = 0.864
+d1       = 0.308
+d2       = 0.525
+d3       = 0.677
+
+>>> EPOCH 28 <<<
+LR = 5e-05, avg_loss = 0.065516
+abs_rel  = 1.011
+sq_rel   = 47.937
+rmse     = 22.740
+rmse_log = 0.854
+d1       = 0.329
+d2       = 0.561
+d3       = 0.707
+
+>>> EPOCH 29 <<<
+LR = 5e-05, avg_loss = 0.072703
+abs_rel  = 1.117
+sq_rel   = 55.324
+rmse     = 23.827
+rmse_log = 0.934
+d1       = 0.311
+d2       = 0.521
+d3       = 0.658
+
+>>> EPOCH 30 <<<
+LR = 2.5e-05, avg_loss = 0.065686
+abs_rel  = 1.360
+sq_rel   = 72.534
+rmse     = 24.161
+rmse_log = 0.917
+d1       = 0.347
+d2       = 0.581
+d3       = 0.713
+
+>>> EPOCH 31 <<<
+LR = 2.5e-05, avg_loss = 0.073144
+abs_rel  = 1.866
+sq_rel   = 105.273
+rmse     = 26.925
+rmse_log = 1.043
+d1       = 0.325
+d2       = 0.530
+d3       = 0.651
+
+>>> EPOCH 32 <<<
+LR = 2.5e-05, avg_loss = 0.070835
+abs_rel  = 0.919
+sq_rel   = 41.377
+rmse     = 22.827
+rmse_log = 0.875
+d1       = 0.320
+d2       = 0.536
+d3       = 0.676
+
+>>> EPOCH 33 <<<
+LR = 2.5e-05, avg_loss = 0.064892
+abs_rel  = 1.227
+sq_rel   = 63.085
+rmse     = 23.516
+rmse_log = 0.888
+d1       = 0.330
+d2       = 0.567
+d3       = 0.714
+
+>>> EPOCH 34 <<<
+LR = 2.5e-05, avg_loss = 0.066232
+abs_rel  = 1.308
+sq_rel   = 69.046
+rmse     = 23.896
+rmse_log = 0.910
+d1       = 0.336
+d2       = 0.570
+d3       = 0.711
+
+>>> EPOCH 35 <<<
+LR = 2.5e-05, avg_loss = 0.064592
+abs_rel  = 1.170
+sq_rel   = 59.941
+rmse     = 23.461
+rmse_log = 0.879
+d1       = 0.335
+d2       = 0.572
+d3       = 0.716
+
+>>> EPOCH 36 <<<
+LR = 2.5e-05, avg_loss = 0.070207
+abs_rel  = 1.006
+sq_rel   = 47.704
+rmse     = 23.512
+rmse_log = 0.920
+d1       = 0.291
+d2       = 0.502
+d3       = 0.650
+
+>>> EPOCH 37 <<<
+LR = 2.5e-05, avg_loss = 0.067178
+abs_rel  = 1.163
+sq_rel   = 58.595
+rmse     = 23.365
+rmse_log = 0.883
+d1       = 0.340
+d2       = 0.579
+d3       = 0.713
+
+>>> EPOCH 38 <<<
+LR = 2.5e-05, avg_loss = 0.069938
+abs_rel  = 1.277
+sq_rel   = 67.165
+rmse     = 23.881
+rmse_log = 0.918
+d1       = 0.342
+d2       = 0.575
+d3       = 0.707
+
+>>> EPOCH 39 <<<
+LR = 2.5e-05, avg_loss = 0.064853
+abs_rel  = 1.370
+sq_rel   = 73.339
+rmse     = 24.439
+rmse_log = 0.921
+d1       = 0.347
+d2       = 0.582
+d3       = 0.714
+
+>>> EPOCH 40 <<<
+LR = 1.25e-05, avg_loss = 0.066650
+abs_rel  = 1.392
+sq_rel   = 74.135
+rmse     = 24.865
+rmse_log = 0.928
+d1       = 0.335
+d2       = 0.566
+d3       = 0.700
+
+>>> EPOCH 41 <<<
+LR = 1.25e-05, avg_loss = 0.068741
+abs_rel  = 1.468
+sq_rel   = 79.365
+rmse     = 25.322
+rmse_log = 0.953
+d1       = 0.331
+d2       = 0.564
+d3       = 0.692
+
+>>> EPOCH 42 <<<
+LR = 1.25e-05, avg_loss = 0.066257
+abs_rel  = 1.147
+sq_rel   = 58.343
+rmse     = 23.579
+rmse_log = 0.885
+d1       = 0.329
+d2       = 0.562
+d3       = 0.707
+
+>>> EPOCH 43 <<<
+LR = 1.25e-05, avg_loss = 0.066604
+abs_rel  = 1.567
+sq_rel   = 86.618
+rmse     = 25.409
+rmse_log = 0.959
+d1       = 0.333
+d2       = 0.564
+d3       = 0.698
+
+>>> EPOCH 44 <<<
+LR = 1.25e-05, avg_loss = 0.065470
+abs_rel  = 1.272
+sq_rel   = 66.799
+rmse     = 23.961
+rmse_log = 0.906
+d1       = 0.341
+d2       = 0.575
+d3       = 0.712
+
+>>> EPOCH 45 <<<
+LR = 1.25e-05, avg_loss = 0.066783
+abs_rel  = 1.404
+sq_rel   = 75.571
+rmse     = 24.492
+rmse_log = 0.931
+d1       = 0.352
+d2       = 0.583
+d3       = 0.709
+
+>>> EPOCH 46 <<<
+LR = 1.25e-05, avg_loss = 0.065198
+abs_rel  = 0.972
+sq_rel   = 45.634
+rmse     = 23.473
+rmse_log = 0.891
+d1       = 0.346
+d2       = 0.557
+d3       = 0.686
+
+>>> EPOCH 47 <<<
+LR = 1.25e-05, avg_loss = 0.065206
+abs_rel  = 1.346
+sq_rel   = 71.671
+rmse     = 24.370
+rmse_log = 0.917
+d1       = 0.337
+d2       = 0.574
+d3       = 0.712
+
+>>> EPOCH 48 <<<
+LR = 1.25e-05, avg_loss = 0.066476
+abs_rel  = 1.441
+sq_rel   = 78.041
+rmse     = 24.849
+rmse_log = 0.939
+d1       = 0.350
+d2       = 0.581
+d3       = 0.706
+
+>>> EPOCH 49 <<<
+LR = 1.25e-05, avg_loss = 0.065960
+abs_rel  = 1.211
+sq_rel   = 62.689
+rmse     = 23.686
+rmse_log = 0.895
+d1       = 0.331
+d2       = 0.570
+d3       = 0.712
+
+>>> EPOCH 50 <<<
+LR = 6.25e-06, avg_loss = 0.066921
+abs_rel  = 1.480
+sq_rel   = 81.146
+rmse     = 25.083
+rmse_log = 0.950
+d1       = 0.339
+d2       = 0.576
+d3       = 0.706
+
+>>> EPOCH 51 <<<
+LR = 6.25e-06, avg_loss = 0.064941
+abs_rel  = 1.308
+sq_rel   = 69.131
+rmse     = 24.385
+rmse_log = 0.910
+d1       = 0.335
+d2       = 0.576
+d3       = 0.714
+
+>>> EPOCH 52 <<<
+LR = 6.25e-06, avg_loss = 0.066621
+abs_rel  = 1.494
+sq_rel   = 80.426
+rmse     = 25.296
+rmse_log = 0.948
+d1       = 0.321
+d2       = 0.555
+d3       = 0.691
+
+>>> EPOCH 53 <<<
+LR = 6.25e-06, avg_loss = 0.069452
+abs_rel  = 1.490
+sq_rel   = 81.558
+rmse     = 25.571
+rmse_log = 0.968
+d1       = 0.319
+d2       = 0.556
+d3       = 0.689
+
+>>> EPOCH 54 <<<
+LR = 6.25e-06, avg_loss = 0.065403
+abs_rel  = 1.212
+sq_rel   = 61.805
+rmse     = 23.816
+rmse_log = 0.884
+d1       = 0.317
+d2       = 0.564
+d3       = 0.713
+
+>>> EPOCH 55 <<<
+LR = 6.25e-06, avg_loss = 0.065466
+abs_rel  = 1.499
+sq_rel   = 81.665
+rmse     = 25.005
+rmse_log = 0.940
+d1       = 0.352
+d2       = 0.586
+d3       = 0.712
+
+>>> EPOCH 56 <<<
+LR = 6.25e-06, avg_loss = 0.069258
+abs_rel  = 1.345
+sq_rel   = 71.572
+rmse     = 24.703
+rmse_log = 0.941
+d1       = 0.298
+d2       = 0.524
+d3       = 0.676
+
+>>> EPOCH 57 <<<
+LR = 6.25e-06, avg_loss = 0.069349
+abs_rel  = 1.245
+sq_rel   = 64.845
+rmse     = 23.838
+rmse_log = 0.915
+d1       = 0.332
+d2       = 0.564
+d3       = 0.701
+
+>>> EPOCH 58 <<<
+LR = 6.25e-06, avg_loss = 0.068291
+abs_rel  = 1.320
+sq_rel   = 69.551
+rmse     = 24.212
+rmse_log = 0.929
+d1       = 0.325
+d2       = 0.557
+d3       = 0.697
+
+>>> EPOCH 59 <<<
+LR = 6.25e-06, avg_loss = 0.070549
+abs_rel  = 1.707
+sq_rel   = 93.535
+rmse     = 26.084
+rmse_log = 1.000
+d1       = 0.334
+d2       = 0.555
+d3       = 0.680
+
+>>> EPOCH 60 <<<
+LR = 3.125e-06, avg_loss = 0.065967
+abs_rel  = 1.637
+sq_rel   = 91.767
+rmse     = 26.135
+rmse_log = 0.977
+d1       = 0.324
+d2       = 0.568
+d3       = 0.701
+
+>>> EPOCH 61 <<<
+LR = 3.125e-06, avg_loss = 0.068541
+abs_rel  = 1.512
+sq_rel   = 82.276
+rmse     = 25.981
+rmse_log = 0.961
+d1       = 0.311
+d2       = 0.553
+d3       = 0.688
+
+>>> EPOCH 62 <<<
+LR = 3.125e-06, avg_loss = 0.065272
+abs_rel  = 1.600
+sq_rel   = 87.805
+rmse     = 25.518
+rmse_log = 0.958
+d1       = 0.330
+d2       = 0.569
+d3       = 0.702
+
+>>> EPOCH 63 <<<
+LR = 3.125e-06, avg_loss = 0.065711
+abs_rel  = 1.534
+sq_rel   = 85.455
+rmse     = 25.283
+rmse_log = 0.957
+d1       = 0.334
+d2       = 0.574
+d3       = 0.709
+
+>>> EPOCH 64 <<<
+LR = 3.125e-06, avg_loss = 0.064229
+abs_rel  = 1.206
+sq_rel   = 63.081
+rmse     = 23.716
+rmse_log = 0.886
+d1       = 0.351
+d2       = 0.591
+d3       = 0.724
+
+>>> EPOCH 65 <<<
+LR = 3.125e-06, avg_loss = 0.065234
+abs_rel  = 1.506
+sq_rel   = 83.146
+rmse     = 25.347
+rmse_log = 0.946
+d1       = 0.343
+d2       = 0.578
+d3       = 0.708
+
+>>> EPOCH 66 <<<
+LR = 3.125e-06, avg_loss = 0.067322
+abs_rel  = 1.225
+sq_rel   = 63.803
+rmse     = 24.133
+rmse_log = 0.909
+d1       = 0.331
+d2       = 0.567
+d3       = 0.706
+
+>>> EPOCH 67 <<<
+LR = 3.125e-06, avg_loss = 0.066390
+abs_rel  = 1.607
+sq_rel   = 88.370
+rmse     = 25.752
+rmse_log = 0.970
+d1       = 0.334
+d2       = 0.565
+d3       = 0.695
+
+>>> EPOCH 68 <<<
+LR = 3.125e-06, avg_loss = 0.065733
+abs_rel  = 1.587
+sq_rel   = 88.139
+rmse     = 25.698
+rmse_log = 0.963
+d1       = 0.334
+d2       = 0.573
+d3       = 0.704
+
+>>> EPOCH 69 <<<
+LR = 3.125e-06, avg_loss = 0.064694
+abs_rel  = 1.554
+sq_rel   = 86.634
+rmse     = 25.483
+rmse_log = 0.952
+d1       = 0.346
+d2       = 0.586
+d3       = 0.713
+
+>>> EPOCH 70 <<<
+LR = 1.5625e-06, avg_loss = 0.066292
+abs_rel  = 1.466
+sq_rel   = 80.636
+rmse     = 25.458
+rmse_log = 0.943
+d1       = 0.324
+d2       = 0.566
+d3       = 0.706
+
+>>> EPOCH 71 <<<
+LR = 1.5625e-06, avg_loss = 0.065563
+abs_rel  = 1.473
+sq_rel   = 80.101
+rmse     = 25.553
+rmse_log = 0.950
+d1       = 0.325
+d2       = 0.562
+d3       = 0.699
+
+>>> EPOCH 72 <<<
+LR = 1.5625e-06, avg_loss = 0.066469
+abs_rel  = 1.535
+sq_rel   = 84.960
+rmse     = 25.742
+rmse_log = 0.962
+d1       = 0.349
+d2       = 0.577
+d3       = 0.704
+
+>>> EPOCH 73 <<<
+LR = 1.5625e-06, avg_loss = 0.066927
+abs_rel  = 1.409
+sq_rel   = 74.696
+rmse     = 25.194
+rmse_log = 0.936
+d1       = 0.324
+d2       = 0.561
+d3       = 0.698
+
+>>> EPOCH 74 <<<
+LR = 1.5625e-06, avg_loss = 0.067331
+abs_rel  = 1.242
+sq_rel   = 65.775
+rmse     = 31.628
+rmse_log = 0.929
+d1       = 0.331
+d2       = 0.558
+d3       = 0.696
+
+>>> EPOCH 75 <<<
+LR = 1.5625e-06, avg_loss = 0.064356
+abs_rel  = 1.424
+sq_rel   = 78.092
+rmse     = 28.754
+rmse_log = 0.925
+d1       = 0.322
+d2       = 0.573
+d3       = 0.714
+
+>>> EPOCH 76 <<<
+LR = 1.5625e-06, avg_loss = 0.063601
+abs_rel  = 1.439
+sq_rel   = 78.358
+rmse     = 26.176
+rmse_log = 0.926
+d1       = 0.340
+d2       = 0.582
+d3       = 0.714
+
+>>> EPOCH 77 <<<
+LR = 1.5625e-06, avg_loss = 0.062570
+abs_rel  = 1.370
+sq_rel   = 74.581
+rmse     = 25.931
+rmse_log = 0.908
+d1       = 0.366
+d2       = 0.604
+d3       = 0.729
+
+>>> EPOCH 78 <<<
+LR = 1.5625e-06, avg_loss = 0.066691
+abs_rel  = 1.671
+sq_rel   = 93.301
+rmse     = 27.689
+rmse_log = 0.988
+d1       = 0.348
+d2       = 0.571
+d3       = 0.692
+
+>>> EPOCH 79 <<<
+LR = 1.5625e-06, avg_loss = 0.065175
+abs_rel  = 1.194
+sq_rel   = 62.445
+rmse     = 34.750
+rmse_log = 0.903
+d1       = 0.341
+d2       = 0.573
+d3       = 0.710
+
+>>> EPOCH 80 <<<
+LR = 7.8125e-07, avg_loss = 0.068180
+abs_rel  = 1.786
+sq_rel   = 99.928
+rmse     = 43.380
+rmse_log = 1.002
+d1       = 0.348
+d2       = 0.567
+d3       = 0.692
+
+>>> EPOCH 81 <<<
+LR = 7.8125e-07, avg_loss = 0.065821
+abs_rel  = 1.622
+sq_rel   = 91.337
+rmse     = 26.772
+rmse_log = 0.972
+d1       = 0.327
+d2       = 0.570
+d3       = 0.704
+
+>>> EPOCH 82 <<<
+LR = 7.8125e-07, avg_loss = 0.063673
+abs_rel  = 1.508
+sq_rel   = 83.610
+rmse     = 26.525
+rmse_log = 0.943
+d1       = 0.346
+d2       = 0.587
+d3       = 0.717
+
+>>> EPOCH 83 <<<
+LR = 7.8125e-07, avg_loss = 0.066518
+abs_rel  = 1.438
+sq_rel   = 79.287
+rmse     = 104.793
+rmse_log = 0.944
+d1       = 0.336
+d2       = 0.571
+d3       = 0.706
+
+>>> EPOCH 84 <<<
+LR = 7.8125e-07, avg_loss = 0.066479
+abs_rel  = 1.515
+sq_rel   = 83.988
+rmse     = 33.951
+rmse_log = 0.955
+d1       = 0.334
+d2       = 0.573
+d3       = 0.705
+
+>>> EPOCH 85 <<<
+LR = 7.8125e-07, avg_loss = 0.067833
+abs_rel  = 1.680
+sq_rel   = 94.786
+rmse     = 28.253
+rmse_log = 0.994
+d1       = 0.347
+d2       = 0.575
+d3       = 0.694
+
+>>> EPOCH 86 <<<
+LR = 7.8125e-07, avg_loss = 0.064170
+abs_rel  = 1.576
+sq_rel   = 88.887
+rmse     = 34.807
+rmse_log = 0.958
+d1       = 0.344
+d2       = 0.581
+d3       = 0.714
+
+>>> EPOCH 87 <<<
+LR = 7.8125e-07, avg_loss = 0.065802
+abs_rel  = 1.680
+sq_rel   = 94.731
+rmse     = 27.782
+rmse_log = 0.981
+d1       = 0.332
+d2       = 0.573
+d3       = 0.703
+
+>>> EPOCH 88 <<<
+LR = 7.8125e-07, avg_loss = 0.065788
+abs_rel  = 1.488
+sq_rel   = 82.526
+rmse     = 31.123
+rmse_log = 0.949
+d1       = 0.354
+d2       = 0.588
+d3       = 0.714
+
+>>> EPOCH 89 <<<
+LR = 7.8125e-07, avg_loss = 0.064701
+abs_rel  = 1.463
+sq_rel   = 80.794
+rmse     = 65.437
+rmse_log = 0.937
+d1       = 0.344
+d2       = 0.584
+d3       = 0.714
+
+>>> EPOCH 90 <<<
+LR = 3.90625e-07, avg_loss = 0.065642
+abs_rel  = 1.564
+sq_rel   = 86.181
+rmse     = 42.483
+rmse_log = 0.961
+d1       = 0.350
+d2       = 0.573
+d3       = 0.698
+
+>>> EPOCH 91 <<<
+LR = 3.90625e-07, avg_loss = 0.066124
+abs_rel  = 1.727
+sq_rel   = 97.943
+rmse     = 28.908
+rmse_log = 0.996
+d1       = 0.338
+d2       = 0.574
+d3       = 0.698
+
+>>> EPOCH 92 <<<
+LR = 3.90625e-07, avg_loss = 0.063859
+abs_rel  = 1.638
+sq_rel   = 92.814
+rmse     = 33.001
+rmse_log = 0.966
+d1       = 0.363
+d2       = 0.593
+d3       = 0.715
+
+>>> EPOCH 93 <<<
+LR = 3.90625e-07, avg_loss = 0.066265
+abs_rel  = 1.623
+sq_rel   = 90.459
+rmse     = 38.592
+rmse_log = 0.974
+d1       = 0.330
+d2       = 0.570
+d3       = 0.701
+
+>>> EPOCH 94 <<<
+LR = 3.90625e-07, avg_loss = 0.064296
+abs_rel  = 1.494
+sq_rel   = 84.050
+rmse     = 51.277
+rmse_log = 0.947
+d1       = 0.366
+d2       = 0.599
+d3       = 0.719
+
+>>> EPOCH 95 <<<
+LR = 3.90625e-07, avg_loss = 0.064491
+abs_rel  = 1.629
+sq_rel   = 92.062
+rmse     = 38.046
+rmse_log = 0.975
+d1       = 0.330
+d2       = 0.572
+d3       = 0.706
+
+>>> EPOCH 96 <<<
+LR = 3.90625e-07, avg_loss = 0.062777
+abs_rel  = 1.594
+sq_rel   = 90.028
+rmse     = 103.059
+rmse_log = 0.953
+d1       = 0.366
+d2       = 0.599
+d3       = 0.720
+
+>>> EPOCH 97 <<<
+LR = 3.90625e-07, avg_loss = 0.064801
+abs_rel  = 1.535
+sq_rel   = 86.691
+rmse     = 52.235
+rmse_log = 0.953
+d1       = 0.341
+d2       = 0.588
+d3       = 0.718
+
+>>> EPOCH 98 <<<
+LR = 3.90625e-07, avg_loss = 0.065045
+abs_rel  = 1.613
+sq_rel   = 90.979
+rmse     = 39.728
+rmse_log = 0.972
+d1       = 0.354
+d2       = 0.586
+d3       = 0.708
+
+>>> EPOCH 99 <<<
+LR = 3.90625e-07, avg_loss = 0.065983
+abs_rel  = 1.562
+sq_rel   = 86.588
+rmse     = 35.471
+rmse_log = 0.958
+d1       = 0.312
+d2       = 0.559
+d3       = 0.705
+
+>>> EPOCH 100 <<<
+LR = 1.953125e-07, avg_loss = 0.069504
+abs_rel  = 1.752
+sq_rel   = 99.535
+rmse     = 83.552
+rmse_log = 1.012
+d1       = 0.341
+d2       = 0.567
+d3       = 0.689
+
+>>> EPOCH 101 <<<
+LR = 1.953125e-07, avg_loss = 0.065137
+abs_rel  = 1.571
+sq_rel   = 87.855
+rmse     = 80.055
+rmse_log = 0.965
+d1       = 0.350
+d2       = 0.581
+d3       = 0.705
+
+>>> EPOCH 102 <<<
+LR = 1.953125e-07, avg_loss = 0.066058
+abs_rel  = 1.705
+sq_rel   = 96.882
+rmse     = 41.324
+rmse_log = 0.994
+d1       = 0.347
+d2       = 0.580
+d3       = 0.701
+
+>>> EPOCH 103 <<<
+LR = 1.953125e-07, avg_loss = 0.064789
+abs_rel  = 1.656
+sq_rel   = 94.128
+rmse     = 89.359
+rmse_log = 0.978
+d1       = 0.340
+d2       = 0.577
+d3       = 0.706
+
+>>> EPOCH 104 <<<
+LR = 1.953125e-07, avg_loss = 0.064547
+abs_rel  = 1.633
+sq_rel   = 93.158
+rmse     = 41.949
+rmse_log = 0.970
+d1       = 0.336
+d2       = 0.581
+d3       = 0.711
+
+>>> EPOCH 105 <<<
+LR = 1.953125e-07, avg_loss = 0.064565
+abs_rel  = 1.474
+sq_rel   = 81.831
+rmse     = 75.195
+rmse_log = 0.937
+d1       = 0.350
+d2       = 0.592
+d3       = 0.720
+
+>>> EPOCH 106 <<<
+LR = 1.953125e-07, avg_loss = 0.068248
+abs_rel  = 1.641
+sq_rel   = 91.686
+rmse     = 37.221
+rmse_log = 0.993
+d1       = 0.330
+d2       = 0.562
+d3       = 0.687
+
+>>> EPOCH 107 <<<
+LR = 1.953125e-07, avg_loss = 0.067005
+abs_rel  = 1.557
+sq_rel   = 86.908
+rmse     = 42.646
+rmse_log = 0.968
+d1       = 0.351
+d2       = 0.577
+d3       = 0.701
+
+>>> EPOCH 108 <<<
+LR = 1.953125e-07, avg_loss = 0.068869
+abs_rel  = 1.327
+sq_rel   = 72.239
+rmse     = 81.159
+rmse_log = 0.945
+d1       = 0.330
+d2       = 0.564
+d3       = 0.701
+
+>>> EPOCH 109 <<<
+LR = 1.953125e-07, avg_loss = 0.068545
+abs_rel  = 1.696
+sq_rel   = 96.143
+rmse     = 35.769
+rmse_log = 0.996
+d1       = 0.350
+d2       = 0.577
+d3       = 0.697
+
+>>> EPOCH 110 <<<
+LR = 9.765625e-08, avg_loss = 0.065686
+abs_rel  = 1.824
+sq_rel   = 105.212
+rmse     = 45.069
+rmse_log = 1.004
+d1       = 0.347
+d2       = 0.582
+d3       = 0.704
+
+>>> EPOCH 111 <<<
+LR = 9.765625e-08, avg_loss = 0.066562
+abs_rel  = 1.664
+sq_rel   = 94.820
+rmse     = 101.410
+rmse_log = 0.984
+d1       = 0.342
+d2       = 0.572
+d3       = 0.700
+
+>>> EPOCH 112 <<<
+LR = 9.765625e-08, avg_loss = 0.064887
+abs_rel  = 1.471
+sq_rel   = 82.214
+rmse     = 62.489
+rmse_log = 0.942
+d1       = 0.345
+d2       = 0.588
+d3       = 0.718
