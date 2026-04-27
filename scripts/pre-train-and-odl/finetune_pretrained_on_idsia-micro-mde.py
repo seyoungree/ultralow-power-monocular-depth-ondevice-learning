@@ -111,7 +111,7 @@ parser.add_argument( '--percentage_idsiadepth_trainset', type=int, default=100)
 parser.add_argument( '--track_also_test_metrics', type=int, default=0)
 # Uncertainty estimation (mirrors pre-training script)
 parser.add_argument( '--probabilistic',     type=int,   default=0)    # 1 = uPydNetProb, 0 = standard
-parser.add_argument( '--mc_dropout',        type=int,   default=1)    # 1 = MC Dropout enabled. SR addition. 
+parser.add_argument( '--mc_dropout',        type=int,   default=0)    # 1 = MC Dropout enabled. SR addition. 
 parser.add_argument( '--mc_dropout_p',      type=float, default=0.1)  # dropout probability
 parser.add_argument( '--mc_dropout_samples',type=int,   default=10)   # number of MC inference passes
 # Sparse Update Options
@@ -122,9 +122,9 @@ parser.add_argument( '--su_update_dec2',    type=int, default=0)
 # Training setup
 parser.add_argument( '--epochs', type=int, default=120 )
 parser.add_argument( '--batch_size', type=int, default=16 )
-parser.add_argument( '--startup_learning_rate', type=float, default=1e-4) # 1e-3 originally
+parser.add_argument( '--startup_learning_rate', type=float, default=1e-3) # 1e-3 originally
 parser.add_argument( '--startup_epoch', type=int, default=10)
-parser.add_argument( '--init_learning_rate', type=float, default=5e-5) #1e-4 originally 
+parser.add_argument( '--init_learning_rate', type=float, default=1e-4) #1e-4 originally 
 parser.add_argument( '--scheduler_epochs_step', type=int, default=10)
 parser.add_argument( '--schedule_lr', type=bool, default=False)
 # Field of view alignment and invalid pixels
