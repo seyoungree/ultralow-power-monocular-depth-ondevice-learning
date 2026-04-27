@@ -1,0 +1,87 @@
+--------------------------------------------------------
+FINE-TUNING MODEL FOR 120 EPOCHS WITH LEARNING RATE 0.001
+Mode: det
+--------------------------------------------------------
+>>> EPOCH 0 <<<
+LR = 0.001, avg_loss = 0.120907
+abs_rel          = 0.797
+sq_rel           = 1.742
+rmse             = 2.391
+rmse_log         = 1.031
+d1               = 0.037
+d2               = 0.086
+d3               = 0.134
+silogloss        = 6.156
+mean_uncertainty = 0.000000  (mode=det)
+
+>>> EPOCH 1 <<<
+LR = 0.001, avg_loss = 0.115994
+abs_rel          = 0.746
+sq_rel           = 1.586
+rmse             = 2.234
+rmse_log         = 0.965
+d1               = 0.022
+d2               = 0.056
+d3               = 0.160
+silogloss        = 5.906
+mean_uncertainty = 0.000000  (mode=det)
+
+>>> EPOCH 2 <<<
+LR = 0.001, avg_loss = 0.123881
+abs_rel          = 0.777
+sq_rel           = 1.672
+rmse             = 2.406
+rmse_log         = 1.031
+d1               = 0.037
+d2               = 0.083
+d3               = 0.144
+silogloss        = 6.125
+mean_uncertainty = 0.000000  (mode=det)
+
+>>> EPOCH 3 <<<
+LR = 0.001, avg_loss = 0.113556
+abs_rel          = 0.773
+sq_rel           = 1.719
+rmse             = 2.312
+rmse_log         = 1.016
+d1               = 0.040
+d2               = 0.095
+d3               = 0.165
+silogloss        = 6.281
+mean_uncertainty = 0.000000  (mode=det)
+
+>>> EPOCH 4 <<<
+LR = 0.001, avg_loss = 0.131772
+abs_rel          = 0.766
+sq_rel           = 1.703
+rmse             = 2.547
+rmse_log         = 1.070
+d1               = 0.040
+d2               = 0.080
+d3               = 0.134
+silogloss        = 6.156
+mean_uncertainty = 0.000000  (mode=det)
+
+>>> EPOCH 5 <<<
+LR = 0.001, avg_loss = 0.113539
+abs_rel          = 0.750
+sq_rel           = 1.641
+rmse             = 2.328
+rmse_log         = 1.023
+d1               = 0.037
+d2               = 0.084
+d3               = 0.160
+silogloss        = 6.125
+mean_uncertainty = 0.000000  (mode=det)
+
+>>> EPOCH 6 <<<
+LR = 0.001, avg_loss = 0.110891
+abs_rel          = 0.750
+sq_rel           = 1.648
+rmse             = 2.438
+rmse_log         = 1.047
+d1               = 0.041
+d2               = 0.084
+d3               = 0.141
+silogloss        = 6.125
+mean_uncertainty = 0.000000  (mode=det)

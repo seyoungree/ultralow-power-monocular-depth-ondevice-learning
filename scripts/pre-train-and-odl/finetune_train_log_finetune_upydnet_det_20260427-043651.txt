@@ -1,0 +1,27 @@
+--------------------------------------------------------
+FINE-TUNING MODEL FOR 120 EPOCHS WITH LEARNING RATE 0.001
+Mode: det
+--------------------------------------------------------
+>>> EPOCH 0 <<<
+LR = 0.001, avg_loss = 0.111925
+abs_rel          = 0.785
+sq_rel           = 1.727
+rmse             = 2.562
+rmse_log         = 1.070
+d1               = 0.029
+d2               = 0.071
+d3               = 0.114
+silogloss        = 6.125
+mean_uncertainty = 0.000000  (mode=det)
+
+>>> EPOCH 1 <<<
+LR = 0.001, avg_loss = 0.126899
+abs_rel          = 0.793
+sq_rel           = 1.734
+rmse             = 2.562
+rmse_log         = 1.078
+d1               = 0.036
+d2               = 0.080
+d3               = 0.136
+silogloss        = 6.312
+mean_uncertainty = 0.000000  (mode=det)

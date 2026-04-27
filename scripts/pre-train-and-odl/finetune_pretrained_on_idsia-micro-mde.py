@@ -111,7 +111,7 @@ parser.add_argument( '--percentage_idsiadepth_trainset', type=int, default=100)
 parser.add_argument( '--track_also_test_metrics', type=int, default=0)
 # Uncertainty estimation (mirrors pre-training script)
 parser.add_argument( '--probabilistic',     type=int,   default=0)    # 1 = uPydNetProb, 0 = standard
-parser.add_argument( '--mc_dropout',        type=int,   default=1)    # 1 = MC Dropout enabled
+parser.add_argument( '--mc_dropout',        type=int,   default=1)    # 1 = MC Dropout enabled. SR addition. 
 parser.add_argument( '--mc_dropout_p',      type=float, default=0.1)  # dropout probability
 parser.add_argument( '--mc_dropout_samples',type=int,   default=10)   # number of MC inference passes
 # Sparse Update Options
@@ -122,9 +122,9 @@ parser.add_argument( '--su_update_dec2',    type=int, default=0)
 # Training setup
 parser.add_argument( '--epochs', type=int, default=120 )
 parser.add_argument( '--batch_size', type=int, default=16 )
-parser.add_argument( '--startup_learning_rate', type=float, default=1e-3)
+parser.add_argument( '--startup_learning_rate', type=float, default=1e-4) # 1e-3 originally
 parser.add_argument( '--startup_epoch', type=int, default=10)
-parser.add_argument( '--init_learning_rate', type=float, default=1e-4)
+parser.add_argument( '--init_learning_rate', type=float, default=5e-5) #1e-4 originally 
 parser.add_argument( '--scheduler_epochs_step', type=int, default=10)
 parser.add_argument( '--schedule_lr', type=bool, default=False)
 # Field of view alignment and invalid pixels
@@ -230,22 +230,23 @@ transform_val   = False
 transform_test  = False
 normalize_imgs  = True
 HFLIP = (hflip_train != 0)
+data_loader_num_workers = 0 if sys.platform == "darwin" else 2
 
 idsiadepth_source_resolution = '48x48'
 
 trainset    = idataloader.miniIDSIADepth(IDSIADEPTH_PATH, transform=transform_train, set='train', normalize=normalize_imgs, flip_horizontally=HFLIP, train_subset_percentage=PERCENTAGE_IDSIADEPTH_SAMPLES)
-trainloader = torch.utils.data.DataLoader(trainset, batch_size=batch_size, shuffle=True, num_workers=2)
+trainloader = torch.utils.data.DataLoader(trainset, batch_size=batch_size, shuffle=True, num_workers=data_loader_num_workers)
 
 if PERCENTAGE_IDSIADEPTH_SAMPLES < 100:
     print(f"Fine-tuning on a subset of {trainset.__len__()} samples ({PERCENTAGE_IDSIADEPTH_SAMPLES}% of the full IDSIA Depth)")
 
 valset      = idataloader.miniIDSIADepth(IDSIADEPTH_PATH, transform=transform_val, set='val', normalize=normalize_imgs, flip_horizontally=False)
-valloader   = torch.utils.data.DataLoader(valset, batch_size=batch_size, shuffle=True, num_workers=2)
+valloader   = torch.utils.data.DataLoader(valset, batch_size=batch_size, shuffle=True, num_workers=data_loader_num_workers)
 
 if TRACK_EPOCHWISE_TEST_ACC:
     print("Tracking also epochwise test accuracy..")
     testset    = idataloader.miniIDSIADepth(IDSIADEPTH_PATH, transform=transform_test, set='test', normalize=normalize_imgs, flip_horizontally=False)
-    testloader = torch.utils.data.DataLoader(testset, batch_size=batch_size, shuffle=True, num_workers=2)
+    testloader = torch.utils.data.DataLoader(testset, batch_size=batch_size, shuffle=True, num_workers=data_loader_num_workers)
 
 # ---------------------------------------------------------------------------
 # Device
@@ -280,19 +281,19 @@ print(f"\nHorizontal flipping augmentation set to {HFLIP}.")
 
 if model_name == 'upydnet':
     if args.probabilistic:
-        net = uPydNetProb(IM_CH_IN, DPTH_CH).to(device)
+        net = uPydNetProb(IM_CH_IN, DPTH_CH)
     elif args.mc_dropout:
-        net = uPydNet(IM_CH_IN, DPTH_CH, dropout_p=args.mc_dropout_p).to(device)
+        net = uPydNet(IM_CH_IN, DPTH_CH, dropout_p=args.mc_dropout_p)
     else:
-        net = uPydNet(IM_CH_IN, DPTH_CH, dropout_p=0.0).to(device)
+        net = uPydNet(IM_CH_IN, DPTH_CH, dropout_p=0.0)
 
 elif model_name == 'upydnet_l':
     if args.probabilistic:
-        net = uPydNetProb_L(IM_CH_IN, DPTH_CH).to(device)
+        net = uPydNetProb_L(IM_CH_IN, DPTH_CH)
     elif args.mc_dropout:
-        net = uPydNet_L(IM_CH_IN, DPTH_CH, dropout_p=args.mc_dropout_p).to(device)
+        net = uPydNet_L(IM_CH_IN, DPTH_CH, dropout_p=args.mc_dropout_p)
     else:
-        net = uPydNet_L(IM_CH_IN, DPTH_CH, dropout_p=0.0).to(device)
+        net = uPydNet_L(IM_CH_IN, DPTH_CH, dropout_p=0.0)
 
 else:
     print('Invalid model selection!!')
@@ -300,10 +301,13 @@ else:
 
 # Load pre-trained model
 print("Loading pre-trained model..")
-net.load_state_dict(torch.load(f"{pre_trained_mdl_path}/{model_name}.pth", map_location=device))
+checkpoint_load_device = device if device == "cuda" else "cpu"
+net.load_state_dict(torch.load(f"{pre_trained_mdl_path}/{model_name}.pth", map_location=checkpoint_load_device))
 
 print("\nModel to be fine-tuned:")
-summary(net, (IM_CH_IN, IM_H_IN, IM_W_IN), batch_size=batch_size)   # <-- HERE, model is still fp32
+summary_device = "cuda" if device == "cuda" else "cpu"
+net = net.to(summary_device)
+summary(net, (IM_CH_IN, IM_H_IN, IM_W_IN), batch_size=batch_size, device=summary_device)
 print(f"\nInput size: [{IM_CH_IN}, {IM_H_IN}, {IM_W_IN}]")
 print(f"Output size: [{DPTH_CH}, {DPTH_H}, {DPTH_W}]")
 
@@ -444,20 +448,20 @@ for epoch in range(starting_epoch, epochs, 1):
         fb      = data['fb']
 
         if DATA_TYPE == 'fp32':
-            imgL  = imgL.type(torch.FloatTensor).to(device)
-            disp  = disp.to(device)
-            depth = depth.to(device)
-            fb    = fb.to(device)
+            imgL  = imgL.to(device=device, dtype=torch.float32)
+            disp  = disp.to(device=device, dtype=torch.float32)
+            depth = depth.to(device=device, dtype=torch.float32)
+            fb    = fb.to(device=device, dtype=torch.float32)
         elif DATA_TYPE == 'fp16':
-            imgL  = imgL.type(torch.HalfTensor).to(device).half()
-            disp  = disp.to(device).half()
-            depth = depth.to(device).half()
-            fb    = fb.to(device).half()
+            imgL  = imgL.to(device=device, dtype=torch.float16)
+            disp  = disp.to(device=device, dtype=torch.float16)
+            depth = depth.to(device=device, dtype=torch.float16)
+            fb    = fb.to(device=device, dtype=torch.float16)
         elif DATA_TYPE == 'bfloat16':
-            imgL  = imgL.type(torch.BFloat16Tensor).to(device).bfloat16()
-            disp  = disp.to(device).bfloat16()
-            depth = depth.to(device).bfloat16()
-            fb    = fb.to(device).bfloat16()
+            imgL  = imgL.to(device=device, dtype=torch.bfloat16)
+            disp  = disp.to(device=device, dtype=torch.bfloat16)
+            depth = depth.to(device=device, dtype=torch.bfloat16)
+            fb    = fb.to(device=device, dtype=torch.bfloat16)
 
         if torch.sum(torch.isnan(imgL)) > 0:
             print('NaN values present in input!')
@@ -567,20 +571,20 @@ for epoch in range(starting_epoch, epochs, 1):
             val_fb      = test_data['fb']
 
             if DATA_TYPE == 'fp32':
-                val_imgL  = val_imgL.type(torch.FloatTensor).to(device)
-                val_disp  = val_disp.to(device)
-                val_depth = val_depth.to(device)
-                val_fb    = val_fb.to(device)
+                val_imgL  = val_imgL.to(device=device, dtype=torch.float32)
+                val_disp  = val_disp.to(device=device, dtype=torch.float32)
+                val_depth = val_depth.to(device=device, dtype=torch.float32)
+                val_fb    = val_fb.to(device=device, dtype=torch.float32)
             elif DATA_TYPE == 'fp16':
-                val_imgL  = val_imgL.type(torch.HalfTensor).to(device).half()
-                val_disp  = val_disp.to(device).half()
-                val_depth = val_depth.to(device).half()
-                val_fb    = val_fb.to(device).half()
+                val_imgL  = val_imgL.to(device=device, dtype=torch.float16)
+                val_disp  = val_disp.to(device=device, dtype=torch.float16)
+                val_depth = val_depth.to(device=device, dtype=torch.float16)
+                val_fb    = val_fb.to(device=device, dtype=torch.float16)
             elif DATA_TYPE == 'bfloat16':
-                val_imgL  = val_imgL.type(torch.BFloat16Tensor).to(device).bfloat16()
-                val_disp  = val_disp.to(device).bfloat16()
-                val_depth = val_depth.to(device).bfloat16()
-                val_fb    = val_fb.to(device).bfloat16()
+                val_imgL  = val_imgL.to(device=device, dtype=torch.bfloat16)
+                val_disp  = val_disp.to(device=device, dtype=torch.bfloat16)
+                val_depth = val_depth.to(device=device, dtype=torch.bfloat16)
+                val_fb    = val_fb.to(device=device, dtype=torch.bfloat16)
 
             # ---- Inference (mirrors pre-training validation) ----
             if args.probabilistic:
@@ -733,20 +737,20 @@ for epoch in range(starting_epoch, epochs, 1):
                     test_fb    = test_data['fb']
 
                     if DATA_TYPE == 'fp32':
-                        test_imgL  = test_imgL.type(torch.FloatTensor).to(device)
-                        test_disp  = test_disp.to(device)
-                        test_depth = test_depth.to(device)
-                        test_fb    = test_fb.to(device)
+                        test_imgL  = test_imgL.to(device=device, dtype=torch.float32)
+                        test_disp  = test_disp.to(device=device, dtype=torch.float32)
+                        test_depth = test_depth.to(device=device, dtype=torch.float32)
+                        test_fb    = test_fb.to(device=device, dtype=torch.float32)
                     elif DATA_TYPE == 'fp16':
-                        test_imgL  = test_imgL.type(torch.HalfTensor).to(device).half()
-                        test_disp  = test_disp.to(device).half()
-                        test_depth = test_depth.to(device).half()
-                        test_fb    = test_fb.to(device).half()
+                        test_imgL  = test_imgL.to(device=device, dtype=torch.float16)
+                        test_disp  = test_disp.to(device=device, dtype=torch.float16)
+                        test_depth = test_depth.to(device=device, dtype=torch.float16)
+                        test_fb    = test_fb.to(device=device, dtype=torch.float16)
                     elif DATA_TYPE == 'bfloat16':
-                        test_imgL  = test_imgL.type(torch.BFloat16Tensor).to(device).bfloat16()
-                        test_disp  = test_disp.to(device).bfloat16()
-                        test_depth = test_depth.to(device).bfloat16()
-                        test_fb    = test_fb.to(device).bfloat16()
+                        test_imgL  = test_imgL.to(device=device, dtype=torch.bfloat16)
+                        test_disp  = test_disp.to(device=device, dtype=torch.bfloat16)
+                        test_depth = test_depth.to(device=device, dtype=torch.bfloat16)
+                        test_fb    = test_fb.to(device=device, dtype=torch.bfloat16)
 
                     # ---- Inference ----
                     if args.probabilistic:
@@ -880,6 +884,7 @@ for epoch in range(starting_epoch, epochs, 1):
         torch.save(net.state_dict(), f"{running_checkpoint_folder}/finetune_{model_name}.pth")
 
         # Final model save block
+        os.makedirs(statedict_dir, exist_ok=True)
         with open(statedict_info, 'w') as f:
             f.write("--- Input and label sizes: ---\n")
             f.write(f"Input size: [{IM_CH_IN}, {IM_H_IN}, {IM_W_IN}]\n")
