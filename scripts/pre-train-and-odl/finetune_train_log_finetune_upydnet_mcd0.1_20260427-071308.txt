@@ -1,0 +1,15 @@
+--------------------------------------------------------
+FINE-TUNING MODEL FOR 120 EPOCHS WITH LEARNING RATE 0.0005
+Mode: mcd0.1
+--------------------------------------------------------
+>>> EPOCH 0 <<<
+LR = 0.0005, avg_loss = 0.637442
+abs_rel          = 0.747
+sq_rel           = 1.449
+rmse             = 2.094
+rmse_log         = 0.842
+d1               = 0.023
+d2               = 0.054
+d3               = 0.175
+silogloss        = 4.649
+mean_uncertainty = nan  (mode=mcd0.1)

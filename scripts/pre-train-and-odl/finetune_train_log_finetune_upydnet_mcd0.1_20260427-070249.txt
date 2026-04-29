@@ -1,0 +1,1443 @@
+--------------------------------------------------------
+FINE-TUNING MODEL FOR 120 EPOCHS WITH LEARNING RATE 0.0005
+Mode: mcd0.1
+--------------------------------------------------------
+>>> EPOCH 0 <<<
+LR = 0.0005, avg_loss = 0.729664
+abs_rel          = 0.455
+sq_rel           = 0.737
+rmse             = 1.446
+rmse_log         = 0.684
+d1               = 0.225
+d2               = 0.434
+d3               = 0.581
+silogloss        = 3.728
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 1 <<<
+LR = 0.0005, avg_loss = 0.728901
+abs_rel          = 0.433
+sq_rel           = 0.679
+rmse             = 1.382
+rmse_log         = 0.634
+d1               = 0.254
+d2               = 0.502
+d3               = 0.620
+silogloss        = 3.708
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 2 <<<
+LR = 0.0005, avg_loss = 0.739004
+abs_rel          = 0.445
+sq_rel           = 0.616
+rmse             = 1.277
+rmse_log         = 0.570
+d1               = 0.274
+d2               = 0.507
+d3               = 0.651
+silogloss        = 3.541
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 3 <<<
+LR = 0.0005, avg_loss = 0.723470
+abs_rel          = 0.421
+sq_rel           = 0.675
+rmse             = 1.383
+rmse_log         = 0.632
+d1               = 0.271
+d2               = 0.513
+d3               = 0.626
+silogloss        = 3.636
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 4 <<<
+LR = 0.0005, avg_loss = 0.728584
+abs_rel          = 0.441
+sq_rel           = 0.657
+rmse             = 1.339
+rmse_log         = 0.605
+d1               = 0.259
+d2               = 0.515
+d3               = 0.623
+silogloss        = 3.538
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 5 <<<
+LR = 0.0005, avg_loss = 0.739884
+abs_rel          = 0.463
+sq_rel           = 0.668
+rmse             = 1.329
+rmse_log         = 0.602
+d1               = 0.253
+d2               = 0.483
+d3               = 0.630
+silogloss        = 3.578
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 6 <<<
+LR = 0.0005, avg_loss = 0.722398
+abs_rel          = 0.430
+sq_rel           = 0.712
+rmse             = 1.417
+rmse_log         = 0.657
+d1               = 0.264
+d2               = 0.489
+d3               = 0.618
+silogloss        = 3.670
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 7 <<<
+LR = 0.0005, avg_loss = 0.727514
+abs_rel          = 0.433
+sq_rel           = 0.691
+rmse             = 1.385
+rmse_log         = 0.630
+d1               = 0.269
+d2               = 0.505
+d3               = 0.620
+silogloss        = 3.658
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 8 <<<
+LR = 0.0005, avg_loss = 0.726521
+abs_rel          = 0.441
+sq_rel           = 0.707
+rmse             = 1.402
+rmse_log         = 0.649
+d1               = 0.255
+d2               = 0.480
+d3               = 0.610
+silogloss        = 3.594
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 9 <<<
+LR = 0.0005, avg_loss = 0.743440
+abs_rel          = 0.463
+sq_rel           = 0.677
+rmse             = 1.342
+rmse_log         = 0.609
+d1               = 0.265
+d2               = 0.489
+d3               = 0.621
+silogloss        = 3.719
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 10 <<<
+LR = 0.0005, avg_loss = 0.740338
+abs_rel          = 0.446
+sq_rel           = 0.676
+rmse             = 1.373
+rmse_log         = 0.628
+d1               = 0.241
+d2               = 0.485
+d3               = 0.621
+silogloss        = 3.605
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 11 <<<
+LR = 0.0005, avg_loss = 0.736212
+abs_rel          = 0.444
+sq_rel           = 0.738
+rmse             = 1.450
+rmse_log         = 0.684
+d1               = 0.222
+d2               = 0.465
+d3               = 0.606
+silogloss        = 3.622
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 12 <<<
+LR = 0.0005, avg_loss = 0.736540
+abs_rel          = 0.445
+sq_rel           = 0.683
+rmse             = 1.370
+rmse_log         = 0.629
+d1               = 0.253
+d2               = 0.501
+d3               = 0.626
+silogloss        = 3.600
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 13 <<<
+LR = 0.0005, avg_loss = 0.733389
+abs_rel          = 0.448
+sq_rel           = 0.731
+rmse             = 1.434
+rmse_log         = 0.671
+d1               = 0.233
+d2               = 0.471
+d3               = 0.609
+silogloss        = 3.661
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 14 <<<
+LR = 0.0005, avg_loss = 0.735588
+abs_rel          = 0.442
+sq_rel           = 0.659
+rmse             = 1.339
+rmse_log         = 0.606
+d1               = 0.263
+d2               = 0.510
+d3               = 0.633
+silogloss        = 3.561
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 15 <<<
+LR = 0.0005, avg_loss = 0.730455
+abs_rel          = 0.444
+sq_rel           = 0.739
+rmse             = 1.440
+rmse_log         = 0.677
+d1               = 0.242
+d2               = 0.467
+d3               = 0.602
+silogloss        = 3.597
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 16 <<<
+LR = 0.0005, avg_loss = 0.740114
+abs_rel          = 0.455
+sq_rel           = 0.633
+rmse             = 1.281
+rmse_log         = 0.573
+d1               = 0.267
+d2               = 0.500
+d3               = 0.629
+silogloss        = 3.521
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 17 <<<
+LR = 0.0005, avg_loss = 0.721813
+abs_rel          = 0.425
+sq_rel           = 0.674
+rmse             = 1.373
+rmse_log         = 0.629
+d1               = 0.272
+d2               = 0.493
+d3               = 0.623
+silogloss        = 3.629
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 18 <<<
+LR = 0.0005, avg_loss = 0.738413
+abs_rel          = 0.482
+sq_rel           = 0.779
+rmse             = 1.356
+rmse_log         = 0.615
+d1               = 0.270
+d2               = 0.519
+d3               = 0.636
+silogloss        = 3.742
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 19 <<<
+LR = 0.0005, avg_loss = 0.727533
+abs_rel          = 0.435
+sq_rel           = 0.694
+rmse             = 1.394
+rmse_log         = 0.641
+d1               = 0.264
+d2               = 0.503
+d3               = 0.622
+silogloss        = 3.680
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 20 <<<
+LR = 0.0005, avg_loss = 0.739235
+abs_rel          = 0.452
+sq_rel           = 0.698
+rmse             = 1.381
+rmse_log         = 0.639
+d1               = 0.239
+d2               = 0.489
+d3               = 0.612
+silogloss        = 3.560
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 21 <<<
+LR = 0.0005, avg_loss = 0.736889
+abs_rel          = 0.440
+sq_rel           = 0.708
+rmse             = 1.412
+rmse_log         = 0.655
+d1               = 0.239
+d2               = 0.496
+d3               = 0.620
+silogloss        = 3.632
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 22 <<<
+LR = 0.0005, avg_loss = 0.720082
+abs_rel          = 0.436
+sq_rel           = 0.725
+rmse             = 1.424
+rmse_log         = 0.671
+d1               = 0.247
+d2               = 0.468
+d3               = 0.595
+silogloss        = 3.672
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 23 <<<
+LR = 0.0005, avg_loss = 0.735069
+abs_rel          = 0.452
+sq_rel           = 0.683
+rmse             = 1.361
+rmse_log         = 0.627
+d1               = 0.246
+d2               = 0.496
+d3               = 0.614
+silogloss        = 3.681
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 24 <<<
+LR = 0.0005, avg_loss = 0.728542
+abs_rel          = 0.449
+sq_rel           = 0.710
+rmse             = 1.396
+rmse_log         = 0.651
+d1               = 0.243
+d2               = 0.493
+d3               = 0.612
+silogloss        = 3.672
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 25 <<<
+LR = 0.0005, avg_loss = 0.738489
+abs_rel          = 0.451
+sq_rel           = 0.686
+rmse             = 1.372
+rmse_log         = 0.632
+d1               = 0.247
+d2               = 0.496
+d3               = 0.620
+silogloss        = 3.680
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 26 <<<
+LR = 0.0005, avg_loss = 0.733560
+abs_rel          = 0.446
+sq_rel           = 0.708
+rmse             = 1.402
+rmse_log         = 0.654
+d1               = 0.243
+d2               = 0.490
+d3               = 0.607
+silogloss        = 3.710
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 27 <<<
+LR = 0.0005, avg_loss = 0.730981
+abs_rel          = 0.456
+sq_rel           = 0.708
+rmse             = 1.384
+rmse_log         = 0.649
+d1               = 0.237
+d2               = 0.476
+d3               = 0.612
+silogloss        = 3.770
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 28 <<<
+LR = 0.0005, avg_loss = 0.722397
+abs_rel          = 0.432
+sq_rel           = 0.672
+rmse             = 1.355
+rmse_log         = 0.621
+d1               = 0.269
+d2               = 0.517
+d3               = 0.628
+silogloss        = 3.661
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 29 <<<
+LR = 0.0005, avg_loss = 0.727050
+abs_rel          = 0.439
+sq_rel           = 0.706
+rmse             = 1.399
+rmse_log         = 0.651
+d1               = 0.247
+d2               = 0.485
+d3               = 0.614
+silogloss        = 3.616
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 30 <<<
+LR = 0.0005, avg_loss = 0.730793
+abs_rel          = 0.436
+sq_rel           = 0.716
+rmse             = 1.411
+rmse_log         = 0.661
+d1               = 0.251
+d2               = 0.471
+d3               = 0.616
+silogloss        = 3.627
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 31 <<<
+LR = 0.0005, avg_loss = 0.726922
+abs_rel          = 0.436
+sq_rel           = 0.659
+rmse             = 1.332
+rmse_log         = 0.608
+d1               = 0.274
+d2               = 0.518
+d3               = 0.632
+silogloss        = 3.662
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 32 <<<
+LR = 0.0005, avg_loss = 0.753840
+abs_rel          = 0.508
+sq_rel           = 0.687
+rmse             = 1.251
+rmse_log         = 0.568
+d1               = 0.268
+d2               = 0.472
+d3               = 0.691
+silogloss        = 3.679
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 33 <<<
+LR = 0.0005, avg_loss = 0.731746
+abs_rel          = 0.449
+sq_rel           = 0.715
+rmse             = 1.401
+rmse_log         = 0.657
+d1               = 0.245
+d2               = 0.481
+d3               = 0.602
+silogloss        = 3.710
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 34 <<<
+LR = 0.0005, avg_loss = 0.741219
+abs_rel          = 0.469
+sq_rel           = 0.686
+rmse             = 1.346
+rmse_log         = 0.618
+d1               = 0.236
+d2               = 0.477
+d3               = 0.622
+silogloss        = 3.682
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 35 <<<
+LR = 0.0005, avg_loss = 0.731847
+abs_rel          = 0.442
+sq_rel           = 0.747
+rmse             = 1.447
+rmse_log         = 0.688
+d1               = 0.230
+d2               = 0.464
+d3               = 0.595
+silogloss        = 3.586
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 36 <<<
+LR = 0.0005, avg_loss = 0.729351
+abs_rel          = 0.438
+sq_rel           = 0.688
+rmse             = 1.373
+rmse_log         = 0.634
+d1               = 0.268
+d2               = 0.502
+d3               = 0.620
+silogloss        = 3.741
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 37 <<<
+LR = 0.0005, avg_loss = 0.731545
+abs_rel          = 0.448
+sq_rel           = 0.686
+rmse             = 1.362
+rmse_log         = 0.628
+d1               = 0.250
+d2               = 0.506
+d3               = 0.619
+silogloss        = 3.680
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 38 <<<
+LR = 0.0005, avg_loss = 0.725620
+abs_rel          = 0.438
+sq_rel           = 0.675
+rmse             = 1.357
+rmse_log         = 0.622
+d1               = 0.267
+d2               = 0.499
+d3               = 0.626
+silogloss        = 3.688
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 39 <<<
+LR = 0.0005, avg_loss = 0.727367
+abs_rel          = 0.438
+sq_rel           = 0.694
+rmse             = 1.386
+rmse_log         = 0.648
+d1               = 0.263
+d2               = 0.492
+d3               = 0.619
+silogloss        = 3.837
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 40 <<<
+LR = 0.0005, avg_loss = 0.724723
+abs_rel          = 0.426
+sq_rel           = 0.676
+rmse             = 1.367
+rmse_log         = 0.627
+d1               = 0.271
+d2               = 0.521
+d3               = 0.629
+silogloss        = 3.602
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 41 <<<
+LR = 0.0005, avg_loss = 0.735507
+abs_rel          = 0.446
+sq_rel           = 0.679
+rmse             = 1.359
+rmse_log         = 0.631
+d1               = 0.245
+d2               = 0.475
+d3               = 0.625
+silogloss        = 3.662
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 42 <<<
+LR = 0.0005, avg_loss = 0.727040
+abs_rel          = 0.451
+sq_rel           = 0.733
+rmse             = 1.422
+rmse_log         = 0.674
+d1               = 0.233
+d2               = 0.464
+d3               = 0.596
+silogloss        = 3.664
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 43 <<<
+LR = 0.0005, avg_loss = 0.725538
+abs_rel          = 0.434
+sq_rel           = 0.697
+rmse             = 1.386
+rmse_log         = 0.642
+d1               = 0.258
+d2               = 0.503
+d3               = 0.617
+silogloss        = 3.563
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 44 <<<
+LR = 0.0005, avg_loss = 0.717839
+abs_rel          = 0.413
+sq_rel           = 0.648
+rmse             = 1.335
+rmse_log         = 0.607
+d1               = 0.296
+d2               = 0.539
+d3               = 0.635
+silogloss        = 3.685
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 45 <<<
+LR = 0.0005, avg_loss = 0.721227
+abs_rel          = 0.431
+sq_rel           = 0.709
+rmse             = 1.405
+rmse_log         = 0.658
+d1               = 0.240
+d2               = 0.477
+d3               = 0.610
+silogloss        = 3.527
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 46 <<<
+LR = 0.0005, avg_loss = 0.727506
+abs_rel          = 0.439
+sq_rel           = 0.704
+rmse             = 1.398
+rmse_log         = 0.654
+d1               = 0.243
+d2               = 0.494
+d3               = 0.611
+silogloss        = 3.656
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 47 <<<
+LR = 0.0005, avg_loss = 0.722890
+abs_rel          = 0.425
+sq_rel           = 0.649
+rmse             = 1.322
+rmse_log         = 0.608
+d1               = 0.274
+d2               = 0.521
+d3               = 0.639
+silogloss        = 3.718
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 48 <<<
+LR = 0.0005, avg_loss = 0.724020
+abs_rel          = 0.434
+sq_rel           = 0.705
+rmse             = 1.396
+rmse_log         = 0.657
+d1               = 0.248
+d2               = 0.483
+d3               = 0.617
+silogloss        = 3.620
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 49 <<<
+LR = 0.0005, avg_loss = 0.728959
+abs_rel          = 0.428
+sq_rel           = 0.662
+rmse             = 1.342
+rmse_log         = 0.613
+d1               = 0.282
+d2               = 0.516
+d3               = 0.635
+silogloss        = 3.649
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 50 <<<
+LR = 0.0005, avg_loss = 0.731677
+abs_rel          = 0.439
+sq_rel           = 0.715
+rmse             = 1.408
+rmse_log         = 0.665
+d1               = 0.251
+d2               = 0.473
+d3               = 0.597
+silogloss        = 3.747
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 51 <<<
+LR = 0.0005, avg_loss = 0.716447
+abs_rel          = 0.428
+sq_rel           = 0.693
+rmse             = 1.379
+rmse_log         = 0.639
+d1               = 0.266
+d2               = 0.495
+d3               = 0.626
+silogloss        = 3.630
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 52 <<<
+LR = 0.0005, avg_loss = 0.730820
+abs_rel          = 0.452
+sq_rel           = 0.730
+rmse             = 1.417
+rmse_log         = 0.669
+d1               = 0.231
+d2               = 0.468
+d3               = 0.610
+silogloss        = 3.744
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 53 <<<
+LR = 0.0005, avg_loss = 0.731055
+abs_rel          = 0.448
+sq_rel           = 0.702
+rmse             = 1.374
+rmse_log         = 0.637
+d1               = 0.263
+d2               = 0.492
+d3               = 0.618
+silogloss        = 3.704
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 54 <<<
+LR = 0.0005, avg_loss = 0.725538
+abs_rel          = 0.445
+sq_rel           = 0.718
+rmse             = 1.395
+rmse_log         = 0.650
+d1               = 0.265
+d2               = 0.478
+d3               = 0.601
+silogloss        = 3.700
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 55 <<<
+LR = 0.0005, avg_loss = 0.719244
+abs_rel          = 0.439
+sq_rel           = 0.712
+rmse             = 1.396
+rmse_log         = 0.653
+d1               = 0.245
+d2               = 0.489
+d3               = 0.618
+silogloss        = 3.639
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 56 <<<
+LR = 0.0005, avg_loss = 0.717345
+abs_rel          = 0.429
+sq_rel           = 0.676
+rmse             = 1.348
+rmse_log         = 0.620
+d1               = 0.285
+d2               = 0.516
+d3               = 0.631
+silogloss        = 3.739
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 57 <<<
+LR = 0.0005, avg_loss = 0.738142
+abs_rel          = 0.454
+sq_rel           = 0.723
+rmse             = 1.415
+rmse_log         = 0.665
+d1               = 0.227
+d2               = 0.465
+d3               = 0.610
+silogloss        = 3.664
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 58 <<<
+LR = 0.0005, avg_loss = 0.721934
+abs_rel          = 0.437
+sq_rel           = 0.694
+rmse             = 1.374
+rmse_log         = 0.638
+d1               = 0.266
+d2               = 0.506
+d3               = 0.621
+silogloss        = 3.784
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 59 <<<
+LR = 0.0005, avg_loss = 0.713394
+abs_rel          = 0.423
+sq_rel           = 0.723
+rmse             = 1.417
+rmse_log         = 0.669
+d1               = 0.261
+d2               = 0.491
+d3               = 0.615
+silogloss        = 3.682
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 60 <<<
+LR = 0.0005, avg_loss = 0.733719
+abs_rel          = 0.439
+sq_rel           = 0.643
+rmse             = 1.301
+rmse_log         = 0.589
+d1               = 0.287
+d2               = 0.510
+d3               = 0.652
+silogloss        = 3.604
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 61 <<<
+LR = 0.0005, avg_loss = 0.731368
+abs_rel          = 0.449
+sq_rel           = 0.695
+rmse             = 1.382
+rmse_log         = 0.640
+d1               = 0.243
+d2               = 0.483
+d3               = 0.620
+silogloss        = 3.690
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 62 <<<
+LR = 0.0005, avg_loss = 0.732571
+abs_rel          = 0.445
+sq_rel           = 0.672
+rmse             = 1.342
+rmse_log         = 0.615
+d1               = 0.264
+d2               = 0.492
+d3               = 0.635
+silogloss        = 3.664
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 63 <<<
+LR = 0.0005, avg_loss = 0.717385
+abs_rel          = 0.434
+sq_rel           = 0.698
+rmse             = 1.382
+rmse_log         = 0.644
+d1               = 0.257
+d2               = 0.502
+d3               = 0.620
+silogloss        = 3.672
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 64 <<<
+LR = 0.0005, avg_loss = 0.717338
+abs_rel          = 0.438
+sq_rel           = 0.735
+rmse             = 1.432
+rmse_log         = 0.678
+d1               = 0.235
+d2               = 0.484
+d3               = 0.606
+silogloss        = 3.703
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 65 <<<
+LR = 0.0005, avg_loss = 0.727485
+abs_rel          = 0.445
+sq_rel           = 0.684
+rmse             = 1.359
+rmse_log         = 0.630
+d1               = 0.256
+d2               = 0.489
+d3               = 0.622
+silogloss        = 3.700
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 66 <<<
+LR = 0.0005, avg_loss = 0.714019
+abs_rel          = 0.431
+sq_rel           = 0.706
+rmse             = 1.394
+rmse_log         = 0.650
+d1               = 0.259
+d2               = 0.499
+d3               = 0.615
+silogloss        = 3.727
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 67 <<<
+LR = 0.0005, avg_loss = 0.715521
+abs_rel          = 0.425
+sq_rel           = 0.698
+rmse             = 1.390
+rmse_log         = 0.645
+d1               = 0.255
+d2               = 0.501
+d3               = 0.619
+silogloss        = 3.607
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 68 <<<
+LR = 0.0005, avg_loss = 0.732969
+abs_rel          = 0.469
+sq_rel           = 0.735
+rmse             = 1.387
+rmse_log         = 0.653
+d1               = 0.243
+d2               = 0.478
+d3               = 0.596
+silogloss        = 3.793
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 69 <<<
+LR = 0.0005, avg_loss = 0.720548
+abs_rel          = 0.443
+sq_rel           = 0.732
+rmse             = 1.431
+rmse_log         = 0.676
+d1               = 0.235
+d2               = 0.470
+d3               = 0.603
+silogloss        = 3.679
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 70 <<<
+LR = 0.0005, avg_loss = 0.739027
+abs_rel          = 0.466
+sq_rel           = 0.684
+rmse             = 1.338
+rmse_log         = 0.613
+d1               = 0.250
+d2               = 0.481
+d3               = 0.622
+silogloss        = 3.652
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 71 <<<
+LR = 0.0005, avg_loss = 0.720256
+abs_rel          = 0.430
+sq_rel           = 0.677
+rmse             = 1.366
+rmse_log         = 0.628
+d1               = 0.267
+d2               = 0.508
+d3               = 0.628
+silogloss        = 3.670
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 72 <<<
+LR = 0.0005, avg_loss = 0.720882
+abs_rel          = 0.446
+sq_rel           = 0.715
+rmse             = 1.398
+rmse_log         = 0.653
+d1               = 0.237
+d2               = 0.478
+d3               = 0.610
+silogloss        = 3.614
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 73 <<<
+LR = 0.0005, avg_loss = 0.728700
+abs_rel          = 0.449
+sq_rel           = 0.680
+rmse             = 1.357
+rmse_log         = 0.627
+d1               = 0.239
+d2               = 0.484
+d3               = 0.623
+silogloss        = 3.656
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 74 <<<
+LR = 0.0005, avg_loss = 0.735006
+abs_rel          = 0.460
+sq_rel           = 0.768
+rmse             = 1.463
+rmse_log         = 0.706
+d1               = 0.208
+d2               = 0.428
+d3               = 0.583
+silogloss        = 3.679
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 75 <<<
+LR = 0.0005, avg_loss = 0.729212
+abs_rel          = 0.457
+sq_rel           = 0.755
+rmse             = 1.443
+rmse_log         = 0.698
+d1               = 0.213
+d2               = 0.441
+d3               = 0.578
+silogloss        = 3.766
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 76 <<<
+LR = 0.0005, avg_loss = 0.728767
+abs_rel          = 0.430
+sq_rel           = 0.637
+rmse             = 1.304
+rmse_log         = 0.586
+d1               = 0.285
+d2               = 0.529
+d3               = 0.640
+silogloss        = 3.600
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 77 <<<
+LR = 0.0005, avg_loss = 0.730984
+abs_rel          = 0.453
+sq_rel           = 0.697
+rmse             = 1.363
+rmse_log         = 0.627
+d1               = 0.248
+d2               = 0.491
+d3               = 0.620
+silogloss        = 3.609
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 78 <<<
+LR = 0.0005, avg_loss = 0.726835
+abs_rel          = 0.437
+sq_rel           = 0.663
+rmse             = 1.335
+rmse_log         = 0.610
+d1               = 0.271
+d2               = 0.503
+d3               = 0.628
+silogloss        = 3.659
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 79 <<<
+LR = 0.0005, avg_loss = 0.727325
+abs_rel          = 0.444
+sq_rel           = 0.723
+rmse             = 1.412
+rmse_log         = 0.666
+d1               = 0.235
+d2               = 0.474
+d3               = 0.604
+silogloss        = 3.736
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 80 <<<
+LR = 0.0005, avg_loss = 0.725099
+abs_rel          = 0.431
+sq_rel           = 0.644
+rmse             = 1.313
+rmse_log         = 0.594
+d1               = 0.281
+d2               = 0.517
+d3               = 0.639
+silogloss        = 3.638
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 81 <<<
+LR = 0.0005, avg_loss = 0.728299
+abs_rel          = 0.440
+sq_rel           = 0.652
+rmse             = 1.303
+rmse_log         = 0.591
+d1               = 0.284
+d2               = 0.516
+d3               = 0.649
+silogloss        = 3.666
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 82 <<<
+LR = 0.0005, avg_loss = 0.731514
+abs_rel          = 0.452
+sq_rel           = 0.716
+rmse             = 1.398
+rmse_log         = 0.653
+d1               = 0.244
+d2               = 0.463
+d3               = 0.612
+silogloss        = 3.732
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 83 <<<
+LR = 0.0005, avg_loss = 0.728804
+abs_rel          = 0.445
+sq_rel           = 0.716
+rmse             = 1.405
+rmse_log         = 0.658
+d1               = 0.232
+d2               = 0.484
+d3               = 0.605
+silogloss        = 3.630
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 84 <<<
+LR = 0.0005, avg_loss = 0.719432
+abs_rel          = 0.443
+sq_rel           = 0.728
+rmse             = 1.416
+rmse_log         = 0.668
+d1               = 0.232
+d2               = 0.487
+d3               = 0.606
+silogloss        = 3.684
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 85 <<<
+LR = 0.0005, avg_loss = 0.731733
+abs_rel          = 0.455
+sq_rel           = 0.737
+rmse             = 1.420
+rmse_log         = 0.673
+d1               = 0.228
+d2               = 0.465
+d3               = 0.597
+silogloss        = 3.640
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 86 <<<
+LR = 0.0005, avg_loss = 0.731459
+abs_rel          = 0.447
+sq_rel           = 0.703
+rmse             = 1.390
+rmse_log         = 0.647
+d1               = 0.243
+d2               = 0.481
+d3               = 0.619
+silogloss        = 3.689
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 87 <<<
+LR = 0.0005, avg_loss = 0.728830
+abs_rel          = 0.444
+sq_rel           = 0.696
+rmse             = 1.376
+rmse_log         = 0.636
+d1               = 0.248
+d2               = 0.497
+d3               = 0.623
+silogloss        = 3.642
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 88 <<<
+LR = 0.0005, avg_loss = 0.726876
+abs_rel          = 0.447
+sq_rel           = 0.680
+rmse             = 1.350
+rmse_log         = 0.620
+d1               = 0.265
+d2               = 0.499
+d3               = 0.627
+silogloss        = 3.704
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 89 <<<
+LR = 0.0005, avg_loss = 0.737087
+abs_rel          = 0.464
+sq_rel           = 0.721
+rmse             = 1.406
+rmse_log         = 0.655
+d1               = 0.220
+d2               = 0.451
+d3               = 0.621
+silogloss        = 3.749
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 90 <<<
+LR = 0.0005, avg_loss = 0.734124
+abs_rel          = 0.454
+sq_rel           = 0.710
+rmse             = 1.399
+rmse_log         = 0.651
+d1               = 0.220
+d2               = 0.472
+d3               = 0.619
+silogloss        = 3.672
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 91 <<<
+LR = 0.0005, avg_loss = 0.741697
+abs_rel          = 0.472
+sq_rel           = 0.752
+rmse             = 1.423
+rmse_log         = 0.671
+d1               = 0.224
+d2               = 0.453
+d3               = 0.600
+silogloss        = 3.680
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 92 <<<
+LR = 0.0005, avg_loss = 0.724019
+abs_rel          = 0.439
+sq_rel           = 0.681
+rmse             = 1.348
+rmse_log         = 0.627
+d1               = 0.266
+d2               = 0.492
+d3               = 0.628
+silogloss        = 3.688
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 93 <<<
+LR = 0.0005, avg_loss = 0.724453
+abs_rel          = 0.444
+sq_rel           = 0.731
+rmse             = 1.412
+rmse_log         = 0.669
+d1               = 0.243
+d2               = 0.475
+d3               = 0.599
+silogloss        = 3.628
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 94 <<<
+LR = 0.0005, avg_loss = 0.734044
+abs_rel          = 0.447
+sq_rel           = 0.700
+rmse             = 1.387
+rmse_log         = 0.642
+d1               = 0.237
+d2               = 0.481
+d3               = 0.627
+silogloss        = 3.662
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 95 <<<
+LR = 0.0005, avg_loss = 0.735439
+abs_rel          = 0.466
+sq_rel           = 0.736
+rmse             = 1.422
+rmse_log         = 0.679
+d1               = 0.198
+d2               = 0.446
+d3               = 0.601
+silogloss        = 3.705
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 96 <<<
+LR = 0.0005, avg_loss = 0.725143
+abs_rel          = 0.460
+sq_rel           = 0.732
+rmse             = 1.402
+rmse_log         = 0.674
+d1               = 0.244
+d2               = 0.474
+d3               = 0.616
+silogloss        = 4.021
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 97 <<<
+LR = 0.0005, avg_loss = 0.729858
+abs_rel          = 0.439
+sq_rel           = 0.700
+rmse             = 1.396
+rmse_log         = 0.650
+d1               = 0.248
+d2               = 0.492
+d3               = 0.624
+silogloss        = 3.706
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 98 <<<
+LR = 0.0005, avg_loss = 0.728269
+abs_rel          = 0.448
+sq_rel           = 0.719
+rmse             = 1.414
+rmse_log         = 0.665
+d1               = 0.237
+d2               = 0.481
+d3               = 0.618
+silogloss        = 3.805
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 99 <<<
+LR = 0.0005, avg_loss = 0.736402
+abs_rel          = 0.467
+sq_rel           = 0.715
+rmse             = 1.381
+rmse_log         = 0.648
+d1               = 0.234
+d2               = 0.463
+d3               = 0.614
+silogloss        = 3.663
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 100 <<<
+LR = 0.0005, avg_loss = 0.726414
+abs_rel          = 0.452
+sq_rel           = 0.723
+rmse             = 1.409
+rmse_log         = 0.668
+d1               = 0.224
+d2               = 0.459
+d3               = 0.592
+silogloss        = 3.630
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 101 <<<
+LR = 0.0005, avg_loss = 0.733049
+abs_rel          = 0.450
+sq_rel           = 0.699
+rmse             = 1.387
+rmse_log         = 0.644
+d1               = 0.234
+d2               = 0.473
+d3               = 0.615
+silogloss        = 3.639
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 102 <<<
+LR = 0.0005, avg_loss = 0.723950
+abs_rel          = 0.441
+sq_rel           = 0.721
+rmse             = 1.403
+rmse_log         = 0.664
+d1               = 0.235
+d2               = 0.482
+d3               = 0.617
+silogloss        = 3.626
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 103 <<<
+LR = 0.0005, avg_loss = 0.729310
+abs_rel          = 0.445
+sq_rel           = 0.702
+rmse             = 1.390
+rmse_log         = 0.645
+d1               = 0.251
+d2               = 0.482
+d3               = 0.614
+silogloss        = 3.698
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 104 <<<
+LR = 0.0005, avg_loss = 0.721750
+abs_rel          = 0.441
+sq_rel           = 0.723
+rmse             = 1.410
+rmse_log         = 0.673
+d1               = 0.244
+d2               = 0.481
+d3               = 0.609
+silogloss        = 3.814
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 105 <<<
+LR = 0.0005, avg_loss = 0.730489
+abs_rel          = 0.448
+sq_rel           = 0.691
+rmse             = 1.379
+rmse_log         = 0.635
+d1               = 0.240
+d2               = 0.475
+d3               = 0.627
+silogloss        = 3.618
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 106 <<<
+LR = 0.0005, avg_loss = 0.730583
+abs_rel          = 0.440
+sq_rel           = 0.677
+rmse             = 1.367
+rmse_log         = 0.630
+d1               = 0.232
+d2               = 0.500
+d3               = 0.641
+silogloss        = 3.549
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 107 <<<
+LR = 0.0005, avg_loss = 0.727076
+abs_rel          = 0.437
+sq_rel           = 0.682
+rmse             = 1.374
+rmse_log         = 0.637
+d1               = 0.234
+d2               = 0.491
+d3               = 0.627
+silogloss        = 3.596
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 108 <<<
+LR = 0.0005, avg_loss = 0.730638
+abs_rel          = 0.438
+sq_rel           = 0.660
+rmse             = 1.341
+rmse_log         = 0.610
+d1               = 0.257
+d2               = 0.503
+d3               = 0.639
+silogloss        = 3.577
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 109 <<<
+LR = 0.0005, avg_loss = 0.729256
+abs_rel          = 0.448
+sq_rel           = 0.725
+rmse             = 1.431
+rmse_log         = 0.675
+d1               = 0.221
+d2               = 0.463
+d3               = 0.597
+silogloss        = 3.705
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 110 <<<
+LR = 0.0005, avg_loss = 0.733823
+abs_rel          = 0.457
+sq_rel           = 0.657
+rmse             = 1.301
+rmse_log         = 0.592
+d1               = 0.264
+d2               = 0.484
+d3               = 0.646
+silogloss        = 3.572
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 111 <<<
+LR = 0.0005, avg_loss = 0.731456
+abs_rel          = 0.449
+sq_rel           = 0.685
+rmse             = 1.364
+rmse_log         = 0.632
+d1               = 0.248
+d2               = 0.475
+d3               = 0.622
+silogloss        = 3.681
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 112 <<<
+LR = 0.0005, avg_loss = 0.722833
+abs_rel          = 0.442
+sq_rel           = 0.721
+rmse             = 1.411
+rmse_log         = 0.662
+d1               = 0.245
+d2               = 0.473
+d3               = 0.603
+silogloss        = 3.592
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 113 <<<
+LR = 0.0005, avg_loss = 0.726229
+abs_rel          = 0.451
+sq_rel           = 0.715
+rmse             = 1.404
+rmse_log         = 0.659
+d1               = 0.229
+d2               = 0.471
+d3               = 0.602
+silogloss        = 3.681
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 114 <<<
+LR = 0.0005, avg_loss = 0.726905
+abs_rel          = 0.453
+sq_rel           = 0.701
+rmse             = 1.377
+rmse_log         = 0.643
+d1               = 0.243
+d2               = 0.474
+d3               = 0.616
+silogloss        = 3.621
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 115 <<<
+LR = 0.0005, avg_loss = 0.727709
+abs_rel          = 0.446
+sq_rel           = 0.713
+rmse             = 1.399
+rmse_log         = 0.650
+d1               = 0.251
+d2               = 0.478
+d3               = 0.614
+silogloss        = 3.614
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 116 <<<
+LR = 0.0005, avg_loss = 0.727919
+abs_rel          = 0.452
+sq_rel           = 0.758
+rmse             = 1.459
+rmse_log         = 0.698
+d1               = 0.206
+d2               = 0.454
+d3               = 0.602
+silogloss        = 3.760
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 117 <<<
+LR = 0.0005, avg_loss = 0.725666
+abs_rel          = 0.449
+sq_rel           = 0.672
+rmse             = 1.320
+rmse_log         = 0.599
+d1               = 0.275
+d2               = 0.509
+d3               = 0.628
+silogloss        = 3.585
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 118 <<<
+LR = 0.0005, avg_loss = 0.730341
+abs_rel          = 0.463
+sq_rel           = 0.784
+rmse             = 1.485
+rmse_log         = 0.730
+d1               = 0.208
+d2               = 0.430
+d3               = 0.578
+silogloss        = 3.978
+mean_uncertainty = nan  (mode=mcd0.1)
+
+>>> EPOCH 119 <<<
+LR = 0.0005, avg_loss = 0.731783
+abs_rel          = 0.440
+sq_rel           = 0.683
+rmse             = 1.375
+rmse_log         = 0.635
+d1               = 0.242
+d2               = 0.496
+d3               = 0.632
+silogloss        = 3.677
+mean_uncertainty = nan  (mode=mcd0.1)

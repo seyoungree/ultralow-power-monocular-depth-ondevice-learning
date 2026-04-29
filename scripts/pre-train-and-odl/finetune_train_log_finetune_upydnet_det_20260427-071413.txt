@@ -1,0 +1,111 @@
+--------------------------------------------------------
+FINE-TUNING MODEL FOR 120 EPOCHS WITH LEARNING RATE 0.001
+Mode: det
+--------------------------------------------------------
+>>> EPOCH 0 <<<
+LR = 0.001, avg_loss = 0.108889
+abs_rel          = 0.756
+sq_rel           = 1.765
+rmse             = 2.532
+rmse_log         = 1.115
+d1               = 0.032
+d2               = 0.078
+d3               = 0.121
+silogloss        = 6.043
+mean_uncertainty = 0.000000  (mode=det)
+
+>>> EPOCH 1 <<<
+LR = 0.001, avg_loss = 0.122355
+abs_rel          = 0.734
+sq_rel           = 1.652
+rmse             = 2.437
+rmse_log         = 1.050
+d1               = 0.033
+d2               = 0.085
+d3               = 0.159
+silogloss        = 5.924
+mean_uncertainty = 0.000000  (mode=det)
+
+>>> EPOCH 2 <<<
+LR = 0.001, avg_loss = 0.152571
+abs_rel          = 0.743
+sq_rel           = 1.792
+rmse             = 2.561
+rmse_log         = 1.158
+d1               = 0.047
+d2               = 0.113
+d3               = 0.165
+silogloss        = 6.174
+mean_uncertainty = 0.000000  (mode=det)
+
+>>> EPOCH 3 <<<
+LR = 0.001, avg_loss = 0.110403
+abs_rel          = 0.741
+sq_rel           = 1.647
+rmse             = 2.400
+rmse_log         = 1.037
+d1               = 0.034
+d2               = 0.083
+d3               = 0.166
+silogloss        = 6.153
+mean_uncertainty = 0.000000  (mode=det)
+
+>>> EPOCH 4 <<<
+LR = 0.001, avg_loss = 0.108712
+abs_rel          = 0.716
+sq_rel           = 1.491
+rmse             = 2.241
+rmse_log         = 0.946
+d1               = 0.034
+d2               = 0.110
+d3               = 0.235
+silogloss        = 6.136
+mean_uncertainty = 0.000000  (mode=det)
+
+>>> EPOCH 5 <<<
+LR = 0.001, avg_loss = 0.117262
+abs_rel          = 0.737
+sq_rel           = 1.635
+rmse             = 2.366
+rmse_log         = 1.026
+d1               = 0.045
+d2               = 0.106
+d3               = 0.204
+silogloss        = 6.397
+mean_uncertainty = 0.000000  (mode=det)
+
+>>> EPOCH 6 <<<
+LR = 0.001, avg_loss = 0.127008
+abs_rel          = 0.730
+sq_rel           = 1.690
+rmse             = 2.467
+rmse_log         = 1.103
+d1               = 0.045
+d2               = 0.107
+d3               = 0.187
+silogloss        = 6.444
+mean_uncertainty = 0.000000  (mode=det)
+
+>>> EPOCH 7 <<<
+LR = 0.001, avg_loss = 0.139216
+abs_rel          = 0.745
+sq_rel           = 1.852
+rmse             = 2.565
+rmse_log         = 1.147
+d1               = 0.053
+d2               = 0.127
+d3               = 0.186
+silogloss        = 6.562
+mean_uncertainty = 0.000000  (mode=det)
+
+>>> EPOCH 8 <<<
+LR = 0.001, avg_loss = 0.111842
+abs_rel          = 0.730
+sq_rel           = 1.617
+rmse             = 2.352
+rmse_log         = 1.017
+d1               = 0.039
+d2               = 0.100
+d3               = 0.201
+silogloss        = 6.225
+mean_uncertainty = 0.000000  (mode=det)
