@@ -26,7 +26,6 @@ import sys
 import os
 import shutil
 import csv
-import numpy as np
 from torchsummary import summary
 from torchstat import stat
 from ignite.metrics.regression import R2Score
@@ -82,8 +81,10 @@ def mc_dropout_inference(net, img, n_samples, device):
 parser = argparse.ArgumentParser("Monocular Depth Estimation CNN Test - uPyd-Net (simplified, with MC Dropout)")
 
 # Dataset / model
-parser.add_argument('--idsiadepth_path', type=str, default='../../micro_sec_mde_clipped',
+parser.add_argument('--idsiadepth_path', type=str, default='../../micro_sec_mde',
                     help='Root path to IDSIA Depth dataset.')
+parser.add_argument('--dataset_split', type=str, default='test', choices=['train', 'val', 'test'],
+                    help='Dataset split to evaluate.')
 parser.add_argument('--model_name', type=str, default='upydnet',
                     help='"upydnet" or "upydnet_l".')
 parser.add_argument('--checkpoint_path', type=str, required=True,
@@ -109,6 +110,7 @@ parser.add_argument('--log_dir', type=str, default='./',
 args = parser.parse_args()
 
 IDSIADEPTH_PATH = args.idsiadepth_path
+dataset_split   = args.dataset_split
 model_name      = args.model_name
 checkpoint_path = args.checkpoint_path
 
@@ -123,14 +125,14 @@ log_csv  = os.path.join(log_dir, 'disp_log.csv')
 examples_dir = os.path.join(log_dir, "examples")
 os.makedirs(examples_dir, exist_ok=True)
 
-print("\n>>> INITIALIZING TEST INFERENCE (SIMPLIFIED + MC DROPOUT) <<<")
+print(f"\n>>> INITIALIZING {dataset_split.upper()} INFERENCE (SIMPLIFIED + MC DROPOUT) <<<")
 
 normalize_imgs = True
 
 testset = idataloader.miniIDSIADepth(
     IDSIADEPTH_PATH,
     transform=False,
-    set='val',
+    set=dataset_split,
     normalize=normalize_imgs,
     flip_horizontally=False
 )
@@ -170,14 +172,17 @@ else:
     print('Invalid model selection!!')
     exit()
 
-print("\nModel:")
-if device in ["cpu", "cuda"]:
-    summary(net, (IM_CH_IN, IM_H_IN, IM_W_IN), batch_size=1, device=device)
-else:
-    print("Skipping torchsummary on MPS (torchsummary only supports CPU/CUDA summary inputs).")
+summary_device = 'cuda' if device == 'cuda' else 'cpu'
+if device == 'mps':
+    net = net.to(summary_device)
 
+print("\nModel:")
+summary(net, (IM_CH_IN, IM_H_IN, IM_W_IN), batch_size=1, device=summary_device)
 print(f"\nInput size:  [{IM_CH_IN}, {IM_H_IN}, {IM_W_IN}]")
 print(f"Output size: [{DPTH_CH}, {DPTH_H}, {DPTH_W}]")
+
+if device == 'mps':
+    net = net.to(device)
 
 print(f"\nLoading checkpoint from: {checkpoint_path}")
 net.load_state_dict(torch.load(checkpoint_path, map_location=device))
@@ -192,7 +197,6 @@ print(f"Eval mode: {mode_str}")
 
 num_batches = len(testloader)
 size = len(testloader.dataset)
-valid_metric_batches = 0
 
 abs_rel_list=[]; sq_rel_list=[]; rmse_list=[]; rmse_log_list=[]
 d1_list=[]; d2_list=[]; d3_list=[]; silog_list=[]
@@ -204,7 +208,7 @@ rmse_log = 0.0; d1       = 0.0; d2      = 0.0
 d3       = 0.0; silog    = 0.0
 mean_unc = 0.0
 
-print("\n>>> Running on /test split <<<")
+print(f"\n>>> Running on /{dataset_split} split <<<")
 
 with torch.no_grad():
     for bi, test_data in enumerate(testloader):
@@ -220,7 +224,8 @@ with torch.no_grad():
         test_fb    = test_fb.to(device)
 
         # Forward (with or without MC Dropout)
-        if args.mc_dropout:
+        # if args.mc_dropout:
+        if True: 
             # test_outputs: [B, H, W]
             test_outputs, unc = mc_dropout_inference(
                 net, test_imgL, n_samples=args.mc_dropout_samples, device=device
@@ -228,7 +233,7 @@ with torch.no_grad():
             mean_unc += unc.mean().item()
         else:
             out = net(test_imgL.to(device)).to(device)   # [B, 1, H, W]
-            test_outputs = torch.squeeze(out, 1)         # [B, H, W]
+            test_outputs = torch.squeeze(out, 1)        # [B, H, W]
 
         # FOV alignment
         if ALIGN_CAM_TOF_FOV == 1 and CROP_BORDER_TOF_VALUES == 1:
@@ -238,7 +243,7 @@ with torch.no_grad():
             pass
 
         # Post-processing (flip-augmentation)
-        flipped_imgL = tfun.hflip(test_imgL)
+        flipped_imgL      = tfun.hflip(test_imgL)
         if args.mc_dropout:
             test_outputs_flip, _ = mc_dropout_inference(
                 net, flipped_imgL, n_samples=args.mc_dropout_samples, device=device
@@ -249,11 +254,11 @@ with torch.no_grad():
 
         test_outputs_flip = tfun.hflip(test_outputs_flip.unsqueeze(1)).squeeze(1)
 
-        border_size = int(test_imgL.size()[-1] * 0.05)
-        img_width   = test_imgL.size()[-1]
+        border_size  = int(test_imgL.size()[-1] * 0.05)
+        img_width    = test_imgL.size()[-1]
         test_outputs_filt = (test_outputs + test_outputs_flip) / 2
-        test_outputs_filt[:, 0:border_size] = test_outputs_flip[:, 0:border_size]
-        test_outputs_filt[:, (img_width - 1):-1] = test_outputs[:, (img_width - 1):-1]
+        test_outputs_filt[:, 0:border_size]    = test_outputs_flip[:, 0:border_size]
+        test_outputs_filt[:, (img_width-1):-1] = test_outputs[:, (img_width-1):-1]
 
         # Compute depth map & upsample ToF depth
         test_outputs_depth = compute_depth_map_test(
@@ -268,21 +273,21 @@ with torch.no_grad():
             test_depth_ups[vmask] = -1
 
         # Skip metrics if no valid GT pixels
-        check_mask = (test_depth_ups != -1)
+        check_mask      = (test_depth_ups != -1)
         tof_valid_values = torch.sum(check_mask)
         if SET_TOF_MAX_DEPTH_TO_INVALID == 1 and tof_valid_values == 0:
             continue
-        valid_metric_batches += 1
-
+        
         if bi < 5:
             # Move tensors to CPU and convert to numpy
-            img_np  = test_imgL[0].detach().cpu().permute(1, 2, 0).numpy()
-            pred_np = test_outputs_depth[0].detach().cpu().numpy()
-            gt_np   = test_depth_ups[0].detach().cpu().numpy()
+            img_np   = test_imgL[0].detach().cpu().permute(1, 2, 0).numpy()  # [H, W, C]
+            pred_np  = test_outputs_depth[0].detach().cpu().numpy()          # [H, W]
+            gt_np    = test_depth_ups[0].detach().cpu().numpy()              # [H, W]
 
             # Optional uncertainty if using MC dropout
-            if args.mc_dropout:
-                unc_np = unc[0].detach().cpu().numpy()
+            # if args.mc_dropout:
+            if True: 
+                unc_np = unc[0].detach().cpu().numpy()  # [H, W]
             else:
                 unc_np = None
 
@@ -352,48 +357,33 @@ with torch.no_grad():
             test_depth_ups.to(device), test_outputs_depth.to(device), 1.0
         )
 
-        abs_rel  += run_abs_rel
-        abs_rel_list.append(float(run_abs_rel.to('cpu')))
-        sq_rel   += run_sq_rel
-        sq_rel_list.append(float(run_sq_rel.to('cpu')))
-        rmse     += run_rmse
-        rmse_list.append(float(run_rmse.to('cpu')))
-        rmse_log += run_rmse_log
-        rmse_log_list.append(float(run_rmse_log.to('cpu')))
-        d1       += run_d1
-        d1_list.append(float(run_d1.to('cpu')))
-        d2       += run_d2
-        d2_list.append(float(run_d2.to('cpu')))
-        d3       += run_d3
-        d3_list.append(float(run_d3.to('cpu')))
-        silog    += run_silog
-        silog_list.append(float(run_silog.to('cpu')))
+        abs_rel  += run_abs_rel     ; abs_rel_list.append(float(run_abs_rel.to('cpu')))
+        sq_rel   += run_sq_rel      ; sq_rel_list.append(float(run_sq_rel.to('cpu')))
+        rmse     += run_rmse        ; rmse_list.append(float(run_rmse.to('cpu')))
+        rmse_log += run_rmse_log    ; rmse_log_list.append(float(run_rmse_log.to('cpu')))
+        d1       += run_d1          ; d1_list.append(float(run_d1.to('cpu')))
+        d2       += run_d2          ; d2_list.append(float(run_d2.to('cpu')))
+        d3       += run_d3          ; d3_list.append(float(run_d3.to('cpu')))
+        silog    += run_silog       ; silog_list.append(float(run_silog.to('cpu')))
 
         if (bi + 1) % 100 == 0 or (bi + 1) == num_batches:
-            print(f"[{bi + 1}/{num_batches}] loss={test_loss/(bi+1):.4f}")
+            print(f"[{bi + 1}/{num_batches}] "
+                  f"loss={test_loss/(bi+1):.4f}")
 
 # Aggregate
-if valid_metric_batches == 0:
-    raise RuntimeError("No valid evaluation batches were found after ground-truth masking.")
-
-test_loss /= valid_metric_batches
-abs_rel   /= valid_metric_batches
-sq_rel    /= valid_metric_batches
-rmse      /= valid_metric_batches
-rmse_log  /= valid_metric_batches
-d1        /= valid_metric_batches
-d2        /= valid_metric_batches
-d3        /= valid_metric_batches
-silog     /= valid_metric_batches
+test_loss /= num_batches
+abs_rel   /= num_batches
+sq_rel    /= num_batches
+rmse      /= num_batches
+rmse_log  /= num_batches
+d1        /= num_batches
+d2        /= num_batches
+d3        /= num_batches
+silog     /= num_batches
 if args.mc_dropout:
-    mean_unc /= valid_metric_batches
+    mean_unc /= num_batches
 
-summary_header = (
-    f"AVERAGE PREDICTION ACCURACY ON {valid_metric_batches} VALID TEST IMAGES "
-    f"(dataset size: {size}):"
-)
-
-print(f"\n{summary_header}")
+print(f"\nAVERAGE PREDICTION ACCURACY ON THE {size} {dataset_split.upper()} IMAGES:")
 print(f"abs_rel = {abs_rel:.3f}")
 print(f"sq_rel  = {sq_rel:.3f}")
 print(f"rmse    = {rmse:.3f}")
@@ -407,17 +397,14 @@ if args.mc_dropout:
     print(f"mean_uncertainty (MC)           = {mean_unc:.6f}")
 
 with open(log_file, 'w') as f:
-    f.write(f"{summary_header}\n")
+    f.write(f"AVERAGE PREDICTION ACCURACY ON THE {size} {dataset_split.upper()} IMAGES:\n")
     f.write(f"abs_rel = {abs_rel:.3f}, sq_rel = {sq_rel:.3f}, "
             f"rmse = {rmse:.3f}, rmse_log = {rmse_log:.3f}, "
             f"d1 = {d1:.3f}, d2 = {d2:.3f}, d3 = {d3:.3f}, silog = {silog:.3f}\n")
     if args.mc_dropout:
         f.write(f"mean_uncertainty (MC) = {mean_unc:.6f}\n")
 
-csv_mean_unc = f"{mean_unc:.6f}" if args.mc_dropout else ""
-
 with open(log_csv, 'w') as fcsv:
-    fcsv.write("ID,abs_rel,sq_rel,rmse,rmse_log,d1,d2,d3,silog,mean_uncertainty_mc\n")
+    fcsv.write("ID,abs_rel,sq_rel,rmse,rmse_log,d1,d2,d3,silog\n")
     fcsv.write(f"4m,{abs_rel:.3f},{sq_rel:.3f},{rmse:.3f},"
-               f"{rmse_log:.3f},{d1:.3f},{d2:.3f},{d3:.3f},{silog:.3f},"
-               f"{csv_mean_unc}\n")
+               f"{rmse_log:.3f},{d1:.3f},{d2:.3f},{d3:.3f},{silog:.3f}\n")
