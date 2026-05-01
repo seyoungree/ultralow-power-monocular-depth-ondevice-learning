@@ -101,7 +101,7 @@ def mc_dropout_inference(net, img, n_samples, device):
 
 parser = argparse.ArgumentParser("Monocular Depth Estimation CNN Fine-Tuning - uPyD-Net")
 # Dataset and model setup
-parser.add_argument( '--idsiadepth_path', type=str, default='../../micro_sec_mde_clipped')
+parser.add_argument( '--idsiadepth_path', type=str, default='./checkpoints/micro_sec_mde')
 parser.add_argument( '--depth_v3_highest_width_resolution', type=int, default=240)
 parser.add_argument( '--model_name', type=str, default='upydnet')                     # 'cnn' or 'upydnet' or 'upydnet_l'
 # Fine-tuning setup
@@ -113,7 +113,7 @@ parser.add_argument( '--percentage_idsiadepth_trainset', type=int, default=100)
 parser.add_argument( '--track_also_test_metrics', type=int, default=0)
 # Uncertainty estimation (mirrors pre-training script)
 parser.add_argument( '--probabilistic',     type=int,   default=0)    # 1 = uPydNetProb, 0 = standard
-parser.add_argument( '--mc_dropout',        type=int,   default=1)    # 1 = MC Dropout enabled. SR addition.
+parser.add_argument( '--mc_dropout',        type=int,   default=0)    # 1 = MC Dropout enabled. SR addition.
 parser.add_argument( '--mc_dropout_p',      type=float, default=0.1)  # dropout probability
 parser.add_argument( '--mc_dropout_samples',type=int,   default=1)    # number of MC inference passes
 # Sparse Update Options
@@ -136,7 +136,7 @@ parser.add_argument( '--set_tof_max_depth_to_invalid', type=int, default=1)
 # Augmentation
 parser.add_argument( '--flip_horizontally_train', type=int, default=1)
 # Pre-trained model path
-parser.add_argument( '--pre_trained_mdl_path', type=str, default='./ckpt_upydnet_mcd0.1_20260426-215823')
+parser.add_argument( '--pre_trained_mdl_path', type=str, default='./checkpoints/micro-tartainair-pre-train')
 # Saving and resume setup
 parser.add_argument( '--save_trained_mdl', type=bool, default=True)
 parser.add_argument( '--saved_mdl_path', type=str, default='saved_models/')
