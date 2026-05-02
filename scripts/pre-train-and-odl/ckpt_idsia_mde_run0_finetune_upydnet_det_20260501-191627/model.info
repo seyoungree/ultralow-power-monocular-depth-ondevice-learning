@@ -1,0 +1,2 @@
+--- ckpt.info organization (tracks best epoch): ---
+epoch,learning_rate,test_loss,abs_rel,sq_rel,rmse,rmse_log,d1,d2,d3

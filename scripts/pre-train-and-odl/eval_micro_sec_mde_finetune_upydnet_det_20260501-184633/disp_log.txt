@@ -1,0 +1,3 @@
+AVERAGE PREDICTION ACCURACY ON THE 30 VAL IMAGES:
+abs_rel = 0.344, sq_rel = 0.343, rmse = 0.800, rmse_log = 0.476, d1 = 0.322, d2 = 0.586, d3 = 0.815, silog = 2.554
+mean_uncertainty (MC) = 1.970123

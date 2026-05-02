@@ -8,14 +8,16 @@ import matplotlib.pyplot as plt
 
 
 plt.rcParams["text.usetex"] = shutil.which("latex") is not None
-
+Y_LABEL = True
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-CSV_PATH = PROJECT_ROOT / "Results" / "No dropout_IDSIA finetuning" / "no dropout_IDSIA finetuning.csv"
-OUTPUT_PATH = PROJECT_ROOT / "Results" / "No dropout_IDSIA finetuning" / "no dropout_IDSIA finetuning.png"
+# CSV_PATH = PROJECT_ROOT / "Results" / "Dropout_IDSIA finetuning" / "abs_rel.csv"
+# OUTPUT_PATH = PROJECT_ROOT / "Results" / "Dropout_IDSIA finetuning" / "abs_rel.png"
 
-# CSV_PATH = PROJECT_ROOT / "Results" / "No dropout_No finetuning" / "abs_rel.csv"
-# OUTPUT_PATH = PROJECT_ROOT / "Results" / "No dropout_No finetuning" / "abs_rel.png"
+# CSV_PATH = PROJECT_ROOT / "Results" / "No dropout_No finetuning" / "d1.csv" 
+# OUTPUT_PATH = PROJECT_ROOT / "Results" / "No dropout_No finetuning" / "d1.png"
 
+CSV_PATH = PROJECT_ROOT / "Results" / "Dropout_No finetuning" / "d1.csv"
+OUTPUT_PATH = PROJECT_ROOT / "Results" / "Dropout_No finetuning" / "d1.png"
 
 def load_tensorboard_csv(csv_path: Path) -> tuple[list[int], list[float]]:
     steps: list[int] = []
@@ -37,9 +39,9 @@ def main() -> None:
 
     fig, ax = plt.subplots(figsize=(9, 5))
     ax.plot(steps, values, color="tab:blue", linewidth=2.0, marker="o", markersize=4)
-    # ax.set_title(r"$\mathrm{No\ Dropout,\ IDSIA\ Finetuning}$", fontsize=30)
     ax.set_xlabel(r"$\mathrm{Epoch}$", fontsize=30)
-    # ax.set_ylabel(r"$\mathrm{Abs\ Rel}$", fontsize=30)
+    if Y_LABEL:
+        ax.set_ylabel(r"$\mathrm{Abs\ Rel}$", fontsize=30)
     ax.tick_params(axis="both", labelsize=15)
     ax.grid(True, alpha=0.3)
 

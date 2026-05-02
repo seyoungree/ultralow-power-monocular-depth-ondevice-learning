@@ -40,6 +40,8 @@ import matplotlib.pyplot as plt
 # ODL extras
 from utils.odl_utils import *
 
+plt.rcParams["text.usetex"] = shutil.which("latex") is not None
+
 
 # ---------------------------------------------------------------------------
 # MC Dropout helpers (same pattern as training script)
@@ -83,7 +85,7 @@ parser = argparse.ArgumentParser("Monocular Depth Estimation CNN Test - uPyd-Net
 # Dataset / model
 parser.add_argument('--idsiadepth_path', type=str, default='../../micro_sec_mde',
                     help='Root path to IDSIA Depth dataset.')
-parser.add_argument('--dataset_split', type=str, default='test', choices=['train', 'val', 'test'],
+parser.add_argument('--dataset_split', type=str, default='val', choices=['train', 'val', 'test'],
                     help='Dataset split to evaluate.')
 parser.add_argument('--model_name', type=str, default='upydnet',
                     help='"upydnet" or "upydnet_l".')
@@ -303,31 +305,44 @@ with torch.no_grad():
             vmax = np.nanmax(gt_vis) if np.isfinite(gt_vis).any() else np.nanmax(pred_np)
 
             # Create a figure with subplots
-            fig, axes = plt.subplots(1, 4 if unc_np is not None else 3, figsize=(14, 4))
+            fig, axes = plt.subplots(1, 2 if unc_np is not None else 1, figsize=(10, 4))
+
+            # ax = axes[0]
+            # ax.imshow(img_np)
+            # ax.set_title(r"$\mathrm{RGB}$", fontsize=15)
+            # ax.set_xlabel(r"$\mathrm{Width}$", fontsize=15)
+            # ax.set_ylabel(r"$\mathrm{Height}$", fontsize=15)
+
+            # ax = axes[1]
+            # im1 = ax.imshow(gt_vis, cmap="plasma", vmin=vmin, vmax=vmax)
+            # ax.set_title(r"$\mathrm{GT\ Depth}$", fontsize=15)
+            # ax.set_xlabel(r"$\mathrm{Width}$", fontsize=15)
+            # ax.set_ylabel(r"$\mathrm{Height}$", fontsize=15)
+            # ax.tick_params(axis="both", labelsize=15)
+            # fig.colorbar(im1, ax=ax, fraction=0.046, pad=0.04)
+
+            axes = np.atleast_1d(axes)
 
             ax = axes[0]
-            ax.imshow(img_np)
-            ax.set_title("RGB")
-            ax.axis("off")
-
-            ax = axes[1]
-            im1 = ax.imshow(gt_vis, cmap="magma", vmin=vmin, vmax=vmax)
-            ax.set_title("GT Depth")
-            ax.axis("off")
-            fig.colorbar(im1, ax=ax, fraction=0.046, pad=0.04)
-
-            ax = axes[2]
-            im2 = ax.imshow(pred_np, cmap="magma", vmin=vmin, vmax=vmax)
-            ax.set_title("Predicted Depth")
-            ax.axis("off")
-            fig.colorbar(im2, ax=ax, fraction=0.046, pad=0.04)
+            im2 = ax.imshow(pred_np, cmap="plasma", vmin=vmin, vmax=vmax)
+            # ax.set_title(r"$\mathrm{Predicted\ Depth}$", fontsize=25)
+            ax.set_xlabel(r"$\mathrm{Width}$", fontsize=25)
+            ax.set_ylabel(r"$\mathrm{Height}$", fontsize=25)
+            ax.tick_params(axis="both", labelsize=15)
+            cbar2 = fig.colorbar(im2, ax=ax, fraction=0.046, pad=0.04)
+            cbar2.set_label(r"$\mathrm{Depth\ (m)}$", fontsize=15)
+            cbar2.ax.tick_params(labelsize=15)
 
             if unc_np is not None:
-                ax = axes[3]
+                ax = axes[1]
                 im3 = ax.imshow(unc_np, cmap="viridis")
-                ax.set_title("Uncertainty")
-                ax.axis("off")
-                fig.colorbar(im3, ax=ax, fraction=0.046, pad=0.04)
+                # ax.set_title(r"$\mathrm{Uncertainty}$", fontsize=25)
+                ax.set_xlabel(r"$\mathrm{Width}$", fontsize=25)
+                ax.set_ylabel(r"$\mathrm{Height}$", fontsize=25)
+                ax.tick_params(axis="both", labelsize=15)
+                cbar3 = fig.colorbar(im3, ax=ax, fraction=0.046, pad=0.04)
+                cbar3.set_label(r"$\mathrm{Std.\ Dev.}$", fontsize=15)
+                cbar3.ax.tick_params(labelsize=15)
 
             fig.tight_layout()
 
