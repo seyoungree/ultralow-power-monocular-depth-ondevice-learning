@@ -112,8 +112,8 @@ parser.add_argument( '--upsample_strategy', type=str, default='bilinear')       
 parser.add_argument( '--percentage_idsiadepth_trainset', type=int, default=100)
 parser.add_argument( '--track_also_test_metrics', type=int, default=0)
 # Uncertainty estimation (mirrors pre-training script)
-parser.add_argument( '--probabilistic',     type=int,   default=0)    # 1 = uPydNetProb, 0 = standard
-parser.add_argument( '--mc_dropout',        type=int,   default=0)    # 1 = MC Dropout enabled. SR addition.
+parser.add_argument( '--probabilistic',     type=int,   default=1)    # 1 = uPydNetProb, 0 = standard
+parser.add_argument( '--mc_dropout',        type=int,   default=1)    # 1 = MC Dropout enabled. SR addition.
 parser.add_argument( '--mc_dropout_p',      type=float, default=0.1)  # dropout probability
 parser.add_argument( '--mc_dropout_samples',type=int,   default=1)    # number of MC inference passes
 # Sparse Update Options
